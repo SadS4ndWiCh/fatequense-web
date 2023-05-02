@@ -58,7 +58,7 @@ export function StudentMenu() {
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem clasName="flex items-center cursor-pointer">
+        <DropdownMenuItem className="flex items-center cursor-pointer">
           <LogOut className="w-4 h-4 mr-2" />
           <span>Sair</span>
         </DropdownMenuItem>
