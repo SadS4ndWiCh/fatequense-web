@@ -10,7 +10,7 @@ export default function StudentLayout({ children }: Props) {
     <div className="flex gap-2 min-h-screen">
       <Sidebar />
 
-      <main className="flex-1 p-6">{children}</main>
+      <main className="flex-1 p-6 ml-[100px]">{children}</main>
     </div>
   );
 }
