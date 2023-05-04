@@ -14,7 +14,7 @@ export function Sidebar() {
   return (
     <aside
       className={cn(
-        "flex flex-col min-w-[100px] p-4 shadow-md transition-all",
+        "fixed top-0 left-0 bottom-0 flex flex-col min-w-[100px] p-4 shadow-md transition-all",
         {
           "items-center": !open,
         }
