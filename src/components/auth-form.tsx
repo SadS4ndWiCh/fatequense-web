@@ -1,8 +1,11 @@
 "use client";
 
+import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { signIn } from "next-auth/react";
 
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
@@ -13,6 +16,9 @@ import { Button } from "./ui/button";
 type FormData = z.infer<typeof studentAuthSchema>;
 
 export function AuthForm() {
+  const [loading, setLoading] = useState(false);
+  const searchParams = useSearchParams();
+
   const {
     register,
     handleSubmit,
@@ -21,7 +27,16 @@ export function AuthForm() {
     resolver: zodResolver(studentAuthSchema),
   });
 
-  async function onSubmit() {}
+  async function onSubmit(data: FormData) {
+    setLoading(true);
+
+    await signIn("credentials", {
+      ...data,
+      callbackUrl: searchParams?.get("from") || "/aluno",
+    });
+
+    setLoading(false);
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-[400px]">
@@ -61,7 +76,7 @@ export function AuthForm() {
           )}
         </div>
 
-        <Button>Entrar com o SIGA</Button>
+        <Button disabled={loading}>Entrar com o SIGA</Button>
       </div>
     </form>
   );
