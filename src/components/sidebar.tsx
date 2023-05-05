@@ -1,14 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Link from "next/link";
+import type { Session } from "next-auth";
 import { GraduationCap } from "lucide-react";
 
 import { StudentMenu } from "./student-menu";
 import { studentConfig } from "~/config/student";
 import { cn } from "~/lib/utils";
 
-export function Sidebar() {
+type Props = {
+  user: Session["user"];
+};
+
+export function Sidebar({ user }: Props) {
   const [open, setOpen] = useState<boolean>(false);
 
   return (
@@ -39,7 +44,7 @@ export function Sidebar() {
         </nav>
       </section>
 
-      <StudentMenu />
+      <StudentMenu user={user} />
     </aside>
   );
 }
