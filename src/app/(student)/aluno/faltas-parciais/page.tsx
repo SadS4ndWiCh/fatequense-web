@@ -9,6 +9,7 @@ export default function PartialAbsences() {
       </header>
 
       <section className="mt-8">
+        {/* @ts-expect-error Async Server Component */}
         <StudentPartialAbsencesTable />
       </section>
     </div>

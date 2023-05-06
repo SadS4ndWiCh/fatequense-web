@@ -1,6 +1,6 @@
 import { StudentScheduleTable } from "~/components/student-schedule-table";
 
-export default function Horary() {
+export default async function Horary() {
   return (
     <div>
       <header>
@@ -9,6 +9,7 @@ export default function Horary() {
       </header>
 
       <section className="mt-6">
+        {/* @ts-expect-error Async Server Component */}
         <StudentScheduleTable />
       </section>
     </div>

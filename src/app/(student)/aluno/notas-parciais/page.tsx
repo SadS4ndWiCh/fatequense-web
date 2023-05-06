@@ -9,6 +9,7 @@ export default function PartialGrade() {
       </header>
 
       <section className="mt-8">
+        {/* @ts-expect-error Async Server Component */}
         <StudentPartialGrades />
       </section>
     </div>
