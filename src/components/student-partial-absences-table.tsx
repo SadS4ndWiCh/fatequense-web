@@ -1,27 +1,18 @@
-import { PartialAbsences } from "~/lib/validators/partial-absences";
+import { notFound } from "next/navigation";
 
-const partialAbsences: PartialAbsences = [
-  {
-    cod: "ISO200",
-    disciplineName: "Sistemas Operacionais II",
-    totalAbsences: 4,
-    totalPresences: 25,
-    lessons: [],
-  },
-  {
-    cod: "IBD002",
-    disciplineName: "Banco de Dados",
-    totalAbsences: 4,
-    totalPresences: 36,
-    lessons: [],
-  },
-];
+import { getCurrentUser } from "~/lib/session";
+import { getStudentPartialAbsences } from "~/lib/student";
 
-export function StudentPartialAbsencesTable() {
+export async function StudentPartialAbsencesTable() {
+  const user = await getCurrentUser();
+  if (!user) notFound();
+
+  const partialAbsences = (await getStudentPartialAbsences({ user })) ?? [];
+
   return (
-    <div className="w-full relative overflow-x-auto">
-      <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <div className="relative w-full overflow-x-auto">
+      <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400">
+        <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th className="px-6 py-3">Sigla</th>
             <th className="px-6 py-3">Disciplina</th>
@@ -34,9 +25,9 @@ export function StudentPartialAbsencesTable() {
           {partialAbsences.map((partialAbsence) => (
             <tr
               key={partialAbsence.cod}
-              className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+              className="border-b bg-white dark:border-gray-700 dark:bg-gray-800"
             >
-              <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+              <td className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white">
                 {partialAbsence.cod}
               </td>
               <td className="px-6 py-4">{partialAbsence.disciplineName}</td>

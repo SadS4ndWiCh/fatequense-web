@@ -1,41 +1,48 @@
-const todaySchedules = [
-  {
-    startsAt: "7:40",
-    discipline: {
-      cod: "IES005",
-      name: "Engenharia de Software",
-    },
-  },
-  {
-    startsAt: "9:30",
-    discipline: {
-      cod: "LIP004",
-      name: "Linguagem de Programação Web",
-    },
-  },
-  {
-    startsAt: "11:10",
-    discipline: {
-      cod: "LIP004",
-      name: "Linguagem de Programação Web",
-    },
-  },
-];
+import dayjs from "dayjs";
+import { PartyPopper } from "lucide-react";
+import { notFound } from "next/navigation";
+import { getCurrentUser } from "~/lib/session";
+import { getStudentSchedules } from "~/lib/student";
 
-export function StudentTodaySchedule() {
+function formatHour(datetime: string) {
+  return dayjs(datetime).format("HH:mm");
+}
+
+export async function StudentTodaySchedule() {
+  const user = await getCurrentUser();
+  if (!user) notFound();
+
+  const schedules = (await getStudentSchedules({ user })) ?? [];
+  const today = dayjs().day() - 1;
+
+  const todaySchedules = today >= 0 ? schedules[today] : [];
+
+  if (todaySchedules.length === 0) {
+    return (
+      <div className="w-[280px]">
+        <div className="mb-4 w-fit rounded-md bg-red-50 p-4">
+          <PartyPopper className="h-5 w-5 text-red-600" />
+        </div>
+
+        <h2 className="text-xl font-bold">Hoje não tem aula</h2>
+        <p>Curta o dia de hoje, pois aqui tem folguinha</p>
+      </div>
+    );
+  }
+
   return (
-    <div>
+    <div className="w-[280px]">
       <ul>
         {todaySchedules.map((schedule) => (
           <li
             key={schedule.startsAt}
-            className="relative max-w-[280px] pl-6 pb-4 border-l border-l-zinc-300 before:absolute before:content-[''] before:top-0 before:left-0 before:w-3 before:h-3 before:bg-zinc-300 before:-translate-x-1/2 before:rounded-full"
+            className="relative max-w-[280px] border-l border-l-zinc-300 pb-4 pl-6 before:absolute before:left-0 before:top-0 before:h-3 before:w-3 before:-translate-x-1/2 before:rounded-full before:bg-zinc-300 before:content-['']"
           >
-            <time dateTime="01/05/2023 7:40" className="text-sm">
-              às {schedule.startsAt}
+            <time dateTime={schedule.startsAt} className="text-sm">
+              às {formatHour(schedule.startsAt)}
             </time>
-            <div className="mt-2 p-4 rounded-md bg-zinc-50">
-              <span className="text-sm">{schedule.discipline.cod}</span>
+            <div className="mt-2 rounded-md bg-zinc-50 p-4">
+              <span className="text-sm">{schedule.cod}</span>
               <p className="truncate">{schedule.discipline.name}</p>
             </div>
           </li>
