@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const lessonSchema = z.object({
   title: z.string(),
-  date: z.string().datetime(),
+  date: z.string().nullish(),
   presences: z.number(),
   absences: z.number(),
 });
@@ -12,7 +12,7 @@ export const partialAbsenceSchema = z.object({
   disciplineName: z.string(),
   totalPresences: z.number(),
   totalAbsences: z.number(),
-  lessons: z.array(lessonSchema),
+  lessons: z.array(lessonSchema).nullish(),
 });
 
 export const partialAbsencesSchema = z.array(partialAbsenceSchema);
