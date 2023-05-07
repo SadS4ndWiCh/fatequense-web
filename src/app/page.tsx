@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { AlertCircle, AtSign, Github, GraduationCap, User } from "lucide-react";
+import { AlertCircle, Github, GraduationCap, User } from "lucide-react";
 import { cn } from "~/lib/utils";
 import { buttonVariants } from "~/components/ui/button";
 import { siteConfig } from "~/config/site";
@@ -44,8 +44,9 @@ export default function Home() {
 
           <p>
             O site pode parar a qualquer momento dependendo das atualizações no
-            SIGA, <em>mesmo que possívelmente não haverá</em>, mas farei o
-            possível para atualizar o mais rápido possível
+            SIGA,{" "}
+            <em className="line-through">mesmo que possívelmente não haverá</em>
+            , mas farei o possível para atualizar o mais rápido possível
           </p>
         </div>
       </section>
