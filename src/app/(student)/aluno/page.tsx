@@ -1,6 +1,10 @@
 import { StudentDetails } from "~/components/student-details";
 import { StudentTodaySchedule } from "~/components/student-today-schedule";
 
+export const metadata = {
+  title: "Home",
+};
+
 export default function Student() {
   return (
     <div className="flex h-full gap-6 divide-x">

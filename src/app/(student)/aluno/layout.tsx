@@ -16,10 +16,10 @@ export default async function StudentLayout({ children }: Props) {
   }
 
   return (
-    <div className="flex gap-2 min-h-screen">
+    <div className="flex min-h-screen gap-2">
       <Sidebar user={user} />
 
-      <main className="flex-1 p-6 ml-[100px]">{children}</main>
+      <main className="ml-[100px] flex-1 p-6">{children}</main>
     </div>
   );
 }

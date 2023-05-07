@@ -1,5 +1,9 @@
 import { StudentScheduleTable } from "~/components/student-schedule-table";
 
+export const metadata = {
+  title: "Horários",
+};
+
 export default async function Horary() {
   return (
     <div>

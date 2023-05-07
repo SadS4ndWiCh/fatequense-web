@@ -1,5 +1,9 @@
 import { StudentPartialGrades } from "~/components/student-partial-grades";
 
+export const metadata = {
+  title: "Notas Parciais",
+};
+
 export default function PartialGrade() {
   return (
     <div>
