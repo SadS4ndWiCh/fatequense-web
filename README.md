@@ -15,3 +15,12 @@ Uma api não oficial do Siga para conseguir pegar suas informações de estudant
 - [TailwindCSS](https://tailwindcss.com)
 - [JWT](https://jwt.io)
 - [Shadcn UI](https://ui.shadcn.com/)
+
+## 🖼️ Telas
+
+### Página inicial
+![Página inicial](./.github/screenshots/fatequense-initial.png)
+### Página de login 
+![Página de login](./.github/screenshots/fatequense-login.png)
+### Página home do estudante
+![Página home do estudante](./.github/screenshots/fatequense-home.png)
