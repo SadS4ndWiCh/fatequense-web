@@ -1,6 +1,6 @@
-# 🏫 Fatequense API
+# 🏫 Fatequense
 
-Uma api não oficial do Siga para conseguir pegar suas informações de estudante facilmente por meio de requisições HTTP!
+Plataforma para visualizar os dados de estudante dos alunos da Fatec
 
 ## 🔎 Observações
 
