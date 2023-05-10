@@ -1,5 +1,8 @@
 import { StudentHistoryTable } from "~/components/student-history-table";
-import { getStudentHistory } from "~/lib/student";
+
+export const metadata = {
+  title: "Histórico",
+};
 
 export default async function History() {
   return (
