@@ -63,6 +63,7 @@ export const authOptions: NextAuthOptions = {
       return {
         ...payload,
         accessToken: user.accessToken,
+        ra: profile.ra,
         name: profile.name,
         email: profile.institutionalEmail,
         picture: profile.photoUrl,
@@ -72,6 +73,7 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       if (!token) return session;
 
+      session.user.ra = token.ra!;
       session.user.name = token.name!;
       session.user.email = token.email!;
       session.user.picture = token.picture!;
