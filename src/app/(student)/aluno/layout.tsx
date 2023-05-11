@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import { Sidebar } from "~/components/sidebar";
 import { getCurrentUser } from "~/lib/session";
+import { Toaster } from "~/components/ui/toaster";
 
 type Props = {
   children: ReactNode;
@@ -20,6 +21,7 @@ export default async function StudentLayout({ children }: Props) {
       <Sidebar user={user} />
 
       <main className="ml-[100px] flex-1 p-6">{children}</main>
+      <Toaster />
     </div>
   );
 }
