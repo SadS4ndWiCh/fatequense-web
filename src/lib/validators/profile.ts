@@ -10,6 +10,7 @@ export const collegeSchema = z.object({
 
 export const profileSchema = z.object({
   name: z.string(),
+  ra: z.string(),
   personalEmail: z.string(),
   institutionalEmail: z.string(),
   birthday: z.string(),
