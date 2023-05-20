@@ -1,7 +1,15 @@
 "use client";
 
 import type { Session } from "next-auth";
-import { CalendarDays, Home, Inbox, LogOut, Puzzle, Star } from "lucide-react";
+import {
+  CalendarDays,
+  Home,
+  Inbox,
+  LogOut,
+  Puzzle,
+  Star,
+  User,
+} from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import {
   DropdownMenu,
@@ -36,6 +44,17 @@ export function StudentMenu({ user }: Props) {
             </p>
           </div>
         </div>
+
+        <DropdownMenuSeparator />
+
+        <DropdownMenuGroup>
+          <DropdownMenuItem asChild className="cursor-pointer">
+            <Link href="/aluno/perfil">
+              <User className="mr-2 h-4 w-4" />
+              <span>Perfil</span>
+            </Link>
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
 
         <DropdownMenuSeparator />
 
@@ -76,7 +95,7 @@ export function StudentMenu({ user }: Props) {
 
         <DropdownMenuItem
           className="flex cursor-pointer items-center"
-          onSelect={(event) => {
+          onSelect={(event: any) => {
             event.preventDefault();
             signOut({ callbackUrl: `${window.location.origin}/login` });
           }}
