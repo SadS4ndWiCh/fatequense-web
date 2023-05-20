@@ -1,16 +1,18 @@
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import {
-  verify as jwtVerify,
-  type Algorithm,
-  type JwtPayload,
-} from "jsonwebtoken";
 
 import { studentAuthSchema } from "./validators/student-auth";
+import { env } from "~/env.mjs";
+import { api } from "./api";
+import { z } from "zod";
 
 export const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/login",
+  },
+  session: {
+    strategy: "jwt",
+    maxAge: 60 * 60 * 3, // 3 horas
   },
   jwt: {
     maxAge: 60 * 60 * 3, // 3 horas
@@ -22,25 +24,35 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         const { username, password } = studentAuthSchema.parse(credentials);
 
-        const authResponse = await fetch("http://localhost:3333/auth/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ username, password }),
-        });
+        try {
+          const { res, data: { token } } = await api.post(
+            z.object({ token: z.string() }),
+            '/auth/login',
+            {
+              data: { username, password }
+            }
+          );
 
-        if (!authResponse.ok) return null;
+          if (!res.ok) return null;
 
-        const { token } = await authResponse.json();
+          return { id: "", accessToken: token }
+        } catch (e) {
+          console.error(e);
 
-        return { id: "", accessToken: token };
+          return null;
+        }
       },
     }),
   ],
 
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger, session: jwtSession }) {
+      if (trigger === 'update' && jwtSession?.picture) {
+        token.picture = jwtSession.picture;
+
+        return token;
+      }
+
       if (!user) return token;
 
       const profileRes = await fetch("http://localhost:3333/student/profile", {
@@ -52,16 +64,7 @@ export const authOptions: NextAuthOptions = {
 
       const { profile } = await profileRes.json();
 
-      const { session, ...payload } = jwtVerify(
-        user.accessToken,
-        process.env.JWT_SECRET_KEY!,
-        {
-          algorithms: [process.env.JWT_ALGORITHM as Algorithm],
-        }
-      ) as JwtPayload;
-
       return {
-        ...payload,
         accessToken: user.accessToken,
         ra: profile.ra,
         name: profile.name,
@@ -83,5 +86,5 @@ export const authOptions: NextAuthOptions = {
     },
   },
 
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: env.NEXTAUTH_SECRET,
 };
