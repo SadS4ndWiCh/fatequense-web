@@ -1,27 +1,31 @@
 import { ReactNode } from "react";
 import { notFound } from "next/navigation";
+import { getServerSession } from "next-auth";
 
 import { Sidebar } from "~/components/sidebar";
-import { getCurrentUser } from "~/lib/session";
 import { Toaster } from "~/components/ui/toaster";
+import { Providers } from "~/components/providers";
 
 type Props = {
   children: ReactNode;
 };
 
 export default async function StudentLayout({ children }: Props) {
-  const user = await getCurrentUser();
+  const session = await getServerSession();
 
-  if (!user) {
+  if (!session) {
     return notFound();
   }
 
   return (
-    <div className="flex min-h-screen gap-2">
-      <Sidebar user={user} />
+    <Providers session={session}>
+      <div className="flex min-h-screen gap-2">
+        {/* @ts-expect-error Async Server Component */}
+        <Sidebar />
 
-      <main className="ml-[100px] flex-1 p-6">{children}</main>
-      <Toaster />
-    </div>
+        <main className="ml-[100px] flex-1 p-6">{children}</main>
+        <Toaster />
+      </div>
+    </Providers>
   );
 }
