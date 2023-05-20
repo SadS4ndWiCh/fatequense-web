@@ -9,7 +9,7 @@ type Props = {
 
 export function StudentProfileCard({ user }: Props) {
   return (
-    <section className="flex w-[265px] flex-col items-center rounded-md px-4 py-6 gap-2">
+    <section className="flex w-[265px] flex-col items-center rounded-md gap-2">
       <Avatar className="h-32 w-32">
         <AvatarImage src={user.picture} alt={user.name} />
         <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
