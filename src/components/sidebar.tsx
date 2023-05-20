@@ -1,15 +1,14 @@
 import Link from "next/link";
-import type { Session } from "next-auth";
 import { GraduationCap } from "lucide-react";
 
-import { StudentMenu } from "./student-menu";
+import { getCurrentUser } from "~/lib/session";
 import { studentConfig } from "~/config/student";
 
-type Props = {
-  user: Session["user"];
-};
+import { StudentMenu } from "./student-menu";
 
-export function Sidebar({ user }: Props) {
+export async function Sidebar() {
+  const user = await getCurrentUser();
+
   return (
     <aside className="fixed bottom-0 left-0 top-0 flex min-w-[100px] flex-col items-center p-4 shadow-md transition-all">
       <section className="flex-1 space-y-6 divide-y">
@@ -33,7 +32,7 @@ export function Sidebar({ user }: Props) {
         </nav>
       </section>
 
-      <StudentMenu user={user} />
+      <StudentMenu user={user!} />
     </aside>
   );
 }
