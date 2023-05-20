@@ -1,17 +1,17 @@
 import { ReactNode } from "react";
 import { notFound } from "next/navigation";
-import { getServerSession } from "next-auth";
 
 import { Sidebar } from "~/components/sidebar";
 import { Toaster } from "~/components/ui/toaster";
 import { Providers } from "~/components/providers";
+import { getSession } from "~/lib/session";
 
 type Props = {
   children: ReactNode;
 };
 
 export default async function StudentLayout({ children }: Props) {
-  const session = await getServerSession();
+  const session = await getSession();
 
   if (!session) {
     return notFound();
