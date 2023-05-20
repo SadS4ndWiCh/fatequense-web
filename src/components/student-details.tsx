@@ -57,7 +57,7 @@ export async function StudentDetails() {
 
         <DetailCard.Content>
           <span className="text-lg font-bold">
-            {profile?.college.currentSemester}
+            {profile?.college.currentSemester - 1}
           </span>
         </DetailCard.Content>
       </DetailCard.Root>
