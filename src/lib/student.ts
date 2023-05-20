@@ -1,94 +1,87 @@
+import { cache } from "react";
 import { Session } from "next-auth";
+import { z } from "zod";
+
 import { historySchema } from "./validators/history";
 import { partialAbsencesSchema } from "./validators/partial-absences";
 import { partialGradesSchema } from "./validators/partial-grades";
 import { profileSchema } from "./validators/profile";
 import { schedulesSchema } from "./validators/schedule";
+import { ProfileEdit } from "./validators/profile-edit";
+import { api } from "./api";
 
 type Props = {
   user: Session["user"];
 };
 
-export async function getStudentProfile({ user }: Props) {
-  const profileResponse = await fetch("http://localhost:3333/student/profile", {
-    method: "GET",
+const profileResponseSchema = z.object({ profile: profileSchema });
+export const getStudentProfile = cache(async ({ user }: Props) => {
+  const { data: { profile } } = await api.get(profileResponseSchema, '/student/profile', {
     headers: {
-      Authorization: `Bearer ${user.accessToken}`,
-    },
+      Authorization: `Bearer ${user.accessToken}`
+    }
   });
 
-  if (!profileResponse.ok) return null;
+  return profile;
+});
 
-  const { profile } = await profileResponse.json();
-
-  return profileSchema.parse(profile);
-}
-
-export async function getStudentHistory({ user }: Props) {
-  const historyResponse = await fetch("http://localhost:3333/student/history", {
-    method: "GET",
+const historyResponseSchema = z.object({ history: historySchema });
+export const getStudentHistory = cache(async ({ user }: Props) => {
+  const { data: { history } } = await api.get(historyResponseSchema, '/student/history', {
     headers: {
-      Authorization: `Bearer ${user.accessToken}`,
-    },
+      Authorization: `Bearer ${user.accessToken}`
+    }
   });
 
-  if (!historyResponse.ok) return null;
+  return history;
+});
 
-  const { history } = await historyResponse.json();
+const scheduleResponseSchema = z.object({ schedule: schedulesSchema });
+export const getStudentSchedules = cache(async ({ user }: Props) => {
+  const { data: { schedule } } = await api.get(scheduleResponseSchema, '/student/schedule', {
+    headers: {
+      Authorization: `Bearer ${user.accessToken}`
+    }
+  });
 
-  return historySchema.parse(history);
-}
+  return schedule;
+});
 
-export async function getStudentSchedules({ user }: Props) {
-  const scheduleResponse = await fetch(
-    "http://localhost:3333/student/schedule",
-    {
-      method: "GET",
+const partialGradeResponseSchema = z.object({ partialGrade: partialGradesSchema });
+export const getStudentPartialGrades = cache(async ({ user }: Props) => {
+  const { data: { partialGrade } } = await api.get(partialGradeResponseSchema, '/student/partialGrade', {
+    headers: {
+      Authorization: `Bearer ${user.accessToken}`
+    }
+  });
+
+  return partialGrade;
+});
+
+const partialAbsencesResponseSchema = z.object({ partialAbsences: partialAbsencesSchema });
+export const getStudentPartialAbsences = cache(async ({ user }: Props) => {
+  const { data: { partialAbsences } } = await api.get(partialAbsencesResponseSchema, '/student/partialAbsences', {
+    headers: {
+      Authorization: `Bearer ${user.accessToken}`
+    }
+  });
+
+  return partialAbsences;
+});
+
+type EditStudentProfileProps = Props & {
+  data: ProfileEdit;
+};
+
+export const editStudentProfile = cache(
+  async ({ user, data }: EditStudentProfileProps) => {
+    const { res } = await api.patch(z.any(), '/student/profile/edit', {
       headers: {
         Authorization: `Bearer ${user.accessToken}`,
       },
-    }
-  );
+      data
+    });
 
-  if (!scheduleResponse.ok) return null;
-
-  const { schedule } = await scheduleResponse.json();
-
-  return schedulesSchema.parse(schedule);
-}
-
-export async function getStudentPartialGrades({ user }: Props) {
-  const partialGradeResponse = await fetch(
-    "http://localhost:3333/student/partialGrade",
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${user.accessToken}`,
-      },
-    }
-  );
-
-  if (!partialGradeResponse.ok) return null;
-
-  const { partialGrade } = await partialGradeResponse.json();
-
-  return partialGradesSchema.parse(partialGrade);
-}
-
-export async function getStudentPartialAbsences({ user }: Props) {
-  const partialAbsencesResponse = await fetch(
-    "http://localhost:3333/student/partialAbsences",
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${user.accessToken}`,
-      },
-    }
-  );
-
-  if (!partialAbsencesResponse.ok) return null;
-
-  const { partialAbsences } = await partialAbsencesResponse.json();
-
-  return partialAbsencesSchema.parse(partialAbsences);
-}
+    return res.ok;
+  }
+);
