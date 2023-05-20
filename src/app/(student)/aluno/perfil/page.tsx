@@ -1,17 +1,19 @@
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import { Settings2 } from "lucide-react";
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
-import { StudentDetails } from "~/components/student-details";
-import { StudentProfileCard } from "~/components/student-profile-card";
-import { buttonVariants } from "~/components/ui/button";
+import { Settings2 } from 'lucide-react';
 
-import { cn } from "~/lib/utils";
-import { getCurrentUser } from "~/lib/session";
+import { getCurrentUser } from '~/lib/session';
+import { cn } from '~/lib/utils';
+
+import { buttonVariants } from '~/components/ui/button';
+
+import { StudentDetails } from '~/components/student-details';
+import { StudentProfileCard } from '~/components/student-profile-card';
 
 export const metadata = {
   title: 'Perfil',
-}
+};
 
 export default async function Profile() {
   const user = await getCurrentUser();
@@ -31,7 +33,10 @@ export default async function Profile() {
 
           <Link
             href="/aluno/perfil/editar"
-            className={cn("inline-block mt-4 w-full", buttonVariants({ size: "sm" }))}
+            className={cn(
+              'inline-block mt-4 w-full',
+              buttonVariants({ size: 'sm' }),
+            )}
           >
             <Settings2 className="mr-2 h-4 w-4" />
             <span>Editar Perfil</span>

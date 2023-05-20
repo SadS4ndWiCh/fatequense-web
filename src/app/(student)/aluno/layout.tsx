@@ -1,10 +1,13 @@
-import { ReactNode } from "react";
-import { notFound } from "next/navigation";
+import { ReactNode } from 'react';
 
-import { Sidebar } from "~/components/sidebar";
-import { Toaster } from "~/components/ui/toaster";
-import { Providers } from "~/components/providers";
-import { getSession } from "~/lib/session";
+import { notFound } from 'next/navigation';
+
+import { getSession } from '~/lib/session';
+
+import { Toaster } from '~/components/ui/toaster';
+
+import { Providers } from '~/components/providers';
+import { Sidebar } from '~/components/sidebar';
 
 type Props = {
   children: ReactNode;

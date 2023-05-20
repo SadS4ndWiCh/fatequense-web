@@ -1,8 +1,9 @@
-import { notFound } from "next/navigation";
+import { notFound } from 'next/navigation';
 
-import * as Table from "./ui/table";
-import { getCurrentUser } from "~/lib/session";
-import { getStudentPartialAbsences } from "~/lib/student";
+import { getCurrentUser } from '~/lib/session';
+import { getStudentPartialAbsences } from '~/lib/student';
+
+import * as Table from './ui/table';
 
 export async function StudentPartialAbsencesTable() {
   const user = await getCurrentUser();

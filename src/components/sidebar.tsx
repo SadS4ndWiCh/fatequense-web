@@ -1,10 +1,12 @@
-import Link from "next/link";
-import { GraduationCap } from "lucide-react";
+import Link from 'next/link';
 
-import { getCurrentUser } from "~/lib/session";
-import { studentConfig } from "~/config/student";
+import { GraduationCap } from 'lucide-react';
 
-import { StudentMenu } from "./student-menu";
+import { studentConfig } from '~/config/student';
+
+import { getCurrentUser } from '~/lib/session';
+
+import { StudentMenu } from './student-menu';
 
 export async function Sidebar() {
   const user = await getCurrentUser();

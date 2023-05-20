@@ -1,8 +1,12 @@
-import Link from "next/link";
-import { AlertCircle, Github, GraduationCap, User } from "lucide-react";
-import { cn } from "~/lib/utils";
-import { buttonVariants } from "~/components/ui/button";
-import { siteConfig } from "~/config/site";
+import Link from 'next/link';
+
+import { AlertCircle, Github, GraduationCap, User } from 'lucide-react';
+
+import { siteConfig } from '~/config/site';
+
+import { cn } from '~/lib/utils';
+
+import { buttonVariants } from '~/components/ui/button';
 
 export default function Home() {
   return (
@@ -26,8 +30,8 @@ export default function Home() {
           <a
             href={siteConfig.links.github}
             target="_blank"
-            rel="noreferer"
-            className={cn(buttonVariants({ variant: "outline" }))}
+            rel="noreferer noreferrer"
+            className={cn(buttonVariants({ variant: 'outline' }))}
           >
             <Github className="mr-2 h-5 w-5" />
             GitHub
@@ -44,7 +48,7 @@ export default function Home() {
 
           <p>
             O site pode parar a qualquer momento dependendo das atualizações no
-            SIGA,{" "}
+            SIGA,{' '}
             <em className="line-through">mesmo que possívelmente não haverá</em>
             , mas farei o possível para atualizar o mais rápido possível
           </p>

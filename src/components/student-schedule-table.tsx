@@ -1,12 +1,13 @@
-import { notFound } from "next/navigation";
+import { notFound } from 'next/navigation';
 
-import { tabulateSchedule } from "~/lib/utils";
-import * as Table from "./ui/table";
-import { DisciplineHoverCard } from "./discipline-hover-card";
-import { getStudentSchedules } from "~/lib/student";
-import { getCurrentUser } from "~/lib/session";
+import { getCurrentUser } from '~/lib/session';
+import { getStudentSchedules } from '~/lib/student';
+import { tabulateSchedule } from '~/lib/utils';
 
-const WEEKDAYS = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
+import { DisciplineHoverCard } from './discipline-hover-card';
+import * as Table from './ui/table';
+
+const WEEKDAYS = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
 
 export async function StudentScheduleTable() {
   const user = await getCurrentUser();
@@ -41,7 +42,7 @@ export async function StudentScheduleTable() {
                 <Table.Data key={`${horary[0]}-${x}${y}`} className="px-6 py-4">
                   <DisciplineHoverCard
                     lesson={horary[1].find(
-                      (lesson) => lesson.weekday - 1 === x
+                      (lesson) => lesson.weekday - 1 === x,
                     )}
                   />
                 </Table.Data>

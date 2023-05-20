@@ -1,4 +1,4 @@
-import { Grade } from "~/lib/validators/partial-grades";
+import { Grade } from '~/lib/validators/partial-grades';
 
 type Props = {
   data: Grade;

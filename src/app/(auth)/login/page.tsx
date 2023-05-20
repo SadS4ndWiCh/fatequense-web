@@ -1,8 +1,9 @@
-import { GraduationCap } from "lucide-react";
-import { AuthForm } from "~/components/auth-form";
+import { GraduationCap } from 'lucide-react';
+
+import { AuthForm } from '~/components/auth-form';
 
 export const metadata = {
-  title: "Login",
+  title: 'Login',
 };
 
 export default async function Login() {

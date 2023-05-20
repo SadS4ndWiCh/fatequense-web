@@ -1,7 +1,8 @@
-import { Session } from "next-auth";
+import { Session } from 'next-auth';
 
-import { CopyButton } from "~/components/copy-button";
-import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
+
+import { CopyButton } from '~/components/copy-button';
 
 type Props = {
   user: Session['user'];
@@ -28,9 +29,7 @@ export function StudentProfileCard({ user }: Props) {
               content={user.email}
               className="w-full"
             >
-              <span className="mr-2 truncate text-sm">
-                {user.email}
-              </span>
+              <span className="mr-2 truncate text-sm">{user.email}</span>
             </CopyButton>
           </div>
           <div className="flex-1">

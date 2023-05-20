@@ -1,9 +1,10 @@
-import { notFound } from "next/navigation";
+import { notFound } from 'next/navigation';
 
-import { getCurrentUser } from "~/lib/session";
-import * as Table from "./ui/table";
-import { getStudentPartialGrades } from "~/lib/student";
-import { cn } from "~/lib/utils";
+import { getCurrentUser } from '~/lib/session';
+import { getStudentPartialGrades } from '~/lib/student';
+import { cn } from '~/lib/utils';
+
+import * as Table from './ui/table';
 
 export async function StudentPartialGrades() {
   const user = await getCurrentUser();
@@ -12,7 +13,7 @@ export async function StudentPartialGrades() {
   const partialGrades = (await getStudentPartialGrades({ user })) ?? [];
   const sortedExamsGrades = partialGrades.map((grade) => {
     const sorted = grade.examsDates.sort((a, b) =>
-      a.title > b.title ? 1 : -1
+      a.title > b.title ? 1 : -1,
     );
     return {
       ...grade,
@@ -50,9 +51,9 @@ export async function StudentPartialGrades() {
             ))}
             <Table.Data>
               <span
-                className={cn("rounded-full px-3 py-1", {
-                  "bg-green-50 text-green-600": grade.averageGrade >= 6,
-                  "bg-red-50 text-red-600": grade.averageGrade < 6,
+                className={cn('rounded-full px-3 py-1', {
+                  'bg-green-50 text-green-600': grade.averageGrade >= 6,
+                  'bg-red-50 text-red-600': grade.averageGrade < 6,
                 })}
               >
                 {grade.averageGrade}

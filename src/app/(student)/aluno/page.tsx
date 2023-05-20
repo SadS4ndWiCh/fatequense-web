@@ -1,9 +1,9 @@
-import { IntroductionHeader } from "~/components/introduction-header";
-import { StudentDetails } from "~/components/student-details";
-import { StudentTodaySchedule } from "~/components/student-today-schedule";
+import { IntroductionHeader } from '~/components/introduction-header';
+import { StudentDetails } from '~/components/student-details';
+import { StudentTodaySchedule } from '~/components/student-today-schedule';
 
 export const metadata = {
-  title: "Home",
+  title: 'Home',
 };
 
 export default function Student() {

@@ -1,6 +1,7 @@
-"use client";
+'use client';
 
-import type { Session } from "next-auth";
+import Link from 'next/link';
+
 import {
   CalendarDays,
   Home,
@@ -9,8 +10,11 @@ import {
   Puzzle,
   Star,
   User,
-} from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+} from 'lucide-react';
+import type { Session } from 'next-auth';
+import { signOut } from 'next-auth/react';
+
+import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,12 +22,10 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
-import { signOut } from "next-auth/react";
-import Link from "next/link";
+} from './ui/dropdown-menu';
 
 type Props = {
-  user: Session["user"];
+  user: Session['user'];
 };
 
 export function StudentMenu({ user }: Props) {

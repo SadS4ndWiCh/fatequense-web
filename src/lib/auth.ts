@@ -1,17 +1,17 @@
-import type { NextAuthOptions } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
+import type { NextAuthOptions } from 'next-auth';
+import CredentialsProvider from 'next-auth/providers/credentials';
+import { z } from 'zod';
+import { env } from '~/env.mjs';
 
-import { studentAuthSchema } from "./validators/student-auth";
-import { env } from "~/env.mjs";
-import { api } from "./api";
-import { z } from "zod";
+import { api } from './api';
+import { studentAuthSchema } from './validators/student-auth';
 
 export const authOptions: NextAuthOptions = {
   pages: {
-    signIn: "/login",
+    signIn: '/login',
   },
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
     maxAge: 60 * 60 * 3, // 3 horas
   },
   jwt: {
@@ -19,23 +19,22 @@ export const authOptions: NextAuthOptions = {
   },
   providers: [
     CredentialsProvider({
-      name: "credentials",
+      name: 'credentials',
       credentials: {},
       async authorize(credentials) {
         const { username, password } = studentAuthSchema.parse(credentials);
 
         try {
-          const { res, data: { token } } = await api.post(
-            z.object({ token: z.string() }),
-            '/auth/login',
-            {
-              data: { username, password }
-            }
-          );
+          const {
+            res,
+            data: { token },
+          } = await api.post(z.object({ token: z.string() }), '/auth/login', {
+            data: { username, password },
+          });
 
           if (!res.ok) return null;
 
-          return { id: "", accessToken: token }
+          return { id: '', accessToken: token };
         } catch (e) {
           console.error(e);
 
@@ -55,8 +54,8 @@ export const authOptions: NextAuthOptions = {
 
       if (!user) return token;
 
-      const profileRes = await fetch("http://localhost:3333/student/profile", {
-        method: "GET",
+      const profileRes = await fetch('http://localhost:3333/student/profile', {
+        method: 'GET',
         headers: {
           Authorization: `Bearer ${user.accessToken}`,
         },

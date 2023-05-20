@@ -1,4 +1,5 @@
-import { z } from "zod";
+import { z } from 'zod';
+
 /*
 cod: z.;
 disciplineName: string;

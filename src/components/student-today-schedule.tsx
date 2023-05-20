@@ -1,11 +1,13 @@
-import dayjs from "dayjs";
-import { PartyPopper } from "lucide-react";
-import { notFound } from "next/navigation";
-import { getCurrentUser } from "~/lib/session";
-import { getStudentSchedules } from "~/lib/student";
+import { notFound } from 'next/navigation';
+
+import dayjs from 'dayjs';
+import { PartyPopper } from 'lucide-react';
+
+import { getCurrentUser } from '~/lib/session';
+import { getStudentSchedules } from '~/lib/student';
 
 function formatHour(datetime: string) {
-  return dayjs(datetime).format("HH:mm");
+  return dayjs(datetime).format('HH:mm');
 }
 
 export async function StudentTodaySchedule() {

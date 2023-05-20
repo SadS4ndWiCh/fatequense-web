@@ -1,9 +1,11 @@
-import { notFound } from "next/navigation";
-import { Award, Rocket, Wine } from "lucide-react";
+import { notFound } from 'next/navigation';
 
-import * as DetailCard from "./detail-card";
-import { getCurrentUser } from "~/lib/session";
-import { getStudentProfile } from "~/lib/student";
+import { Award, Rocket, Wine } from 'lucide-react';
+
+import { getCurrentUser } from '~/lib/session';
+import { getStudentProfile } from '~/lib/student';
+
+import * as DetailCard from './detail-card';
 
 export async function StudentDetails() {
   const user = await getCurrentUser();

@@ -1,25 +1,28 @@
-import { cache } from "react";
-import { Session } from "next-auth";
-import { z } from "zod";
+import { cache } from 'react';
 
-import { historySchema } from "./validators/history";
-import { partialAbsencesSchema } from "./validators/partial-absences";
-import { partialGradesSchema } from "./validators/partial-grades";
-import { profileSchema } from "./validators/profile";
-import { schedulesSchema } from "./validators/schedule";
-import { ProfileEdit } from "./validators/profile-edit";
-import { api } from "./api";
+import { Session } from 'next-auth';
+import { z } from 'zod';
+
+import { api } from './api';
+import { historySchema } from './validators/history';
+import { partialAbsencesSchema } from './validators/partial-absences';
+import { partialGradesSchema } from './validators/partial-grades';
+import { profileSchema } from './validators/profile';
+import { ProfileEdit } from './validators/profile-edit';
+import { schedulesSchema } from './validators/schedule';
 
 type Props = {
-  user: Session["user"];
+  user: Session['user'];
 };
 
 const profileResponseSchema = z.object({ profile: profileSchema });
 export const getStudentProfile = cache(async ({ user }: Props) => {
-  const { data: { profile } } = await api.get(profileResponseSchema, '/student/profile', {
+  const {
+    data: { profile },
+  } = await api.get(profileResponseSchema, '/student/profile', {
     headers: {
-      Authorization: `Bearer ${user.accessToken}`
-    }
+      Authorization: `Bearer ${user.accessToken}`,
+    },
   });
 
   return profile;
@@ -27,10 +30,12 @@ export const getStudentProfile = cache(async ({ user }: Props) => {
 
 const historyResponseSchema = z.object({ history: historySchema });
 export const getStudentHistory = cache(async ({ user }: Props) => {
-  const { data: { history } } = await api.get(historyResponseSchema, '/student/history', {
+  const {
+    data: { history },
+  } = await api.get(historyResponseSchema, '/student/history', {
     headers: {
-      Authorization: `Bearer ${user.accessToken}`
-    }
+      Authorization: `Bearer ${user.accessToken}`,
+    },
   });
 
   return history;
@@ -38,32 +43,42 @@ export const getStudentHistory = cache(async ({ user }: Props) => {
 
 const scheduleResponseSchema = z.object({ schedule: schedulesSchema });
 export const getStudentSchedules = cache(async ({ user }: Props) => {
-  const { data: { schedule } } = await api.get(scheduleResponseSchema, '/student/schedule', {
+  const {
+    data: { schedule },
+  } = await api.get(scheduleResponseSchema, '/student/schedule', {
     headers: {
-      Authorization: `Bearer ${user.accessToken}`
-    }
+      Authorization: `Bearer ${user.accessToken}`,
+    },
   });
 
   return schedule;
 });
 
-const partialGradeResponseSchema = z.object({ partialGrade: partialGradesSchema });
+const partialGradeResponseSchema = z.object({
+  partialGrade: partialGradesSchema,
+});
 export const getStudentPartialGrades = cache(async ({ user }: Props) => {
-  const { data: { partialGrade } } = await api.get(partialGradeResponseSchema, '/student/partialGrade', {
+  const {
+    data: { partialGrade },
+  } = await api.get(partialGradeResponseSchema, '/student/partialGrade', {
     headers: {
-      Authorization: `Bearer ${user.accessToken}`
-    }
+      Authorization: `Bearer ${user.accessToken}`,
+    },
   });
 
   return partialGrade;
 });
 
-const partialAbsencesResponseSchema = z.object({ partialAbsences: partialAbsencesSchema });
+const partialAbsencesResponseSchema = z.object({
+  partialAbsences: partialAbsencesSchema,
+});
 export const getStudentPartialAbsences = cache(async ({ user }: Props) => {
-  const { data: { partialAbsences } } = await api.get(partialAbsencesResponseSchema, '/student/partialAbsences', {
+  const {
+    data: { partialAbsences },
+  } = await api.get(partialAbsencesResponseSchema, '/student/partialAbsences', {
     headers: {
-      Authorization: `Bearer ${user.accessToken}`
-    }
+      Authorization: `Bearer ${user.accessToken}`,
+    },
   });
 
   return partialAbsences;
@@ -79,9 +94,9 @@ export const editStudentProfile = cache(
       headers: {
         Authorization: `Bearer ${user.accessToken}`,
       },
-      data
+      data,
     });
 
     return res.ok;
-  }
+  },
 );

@@ -1,7 +1,7 @@
-import { StudentScheduleTable } from "~/components/student-schedule-table";
+import { StudentScheduleTable } from '~/components/student-schedule-table';
 
 export const metadata = {
-  title: "Horários",
+  title: 'Horários',
 };
 
 export default async function Horary() {

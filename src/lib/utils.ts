@@ -1,15 +1,15 @@
-import { ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
-import dayjs from "dayjs";
+import { ClassValue, clsx } from 'clsx';
+import dayjs from 'dayjs';
+import { twMerge } from 'tailwind-merge';
 
-import { Lesson, Schedules, schedulesSchema } from "./validators/schedule";
+import { Lesson, Schedules, schedulesSchema } from './validators/schedule';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
 export function dateToTimeStr(date: string) {
-  return dayjs(date).format("HH:mm");
+  return dayjs(date).format('HH:mm');
 }
 
 type ScheduleHorary = Lesson & {
@@ -24,7 +24,7 @@ export function tabulateSchedule(schedules: Schedules) {
   schedulesParsed.forEach((schedule) => {
     schedule.forEach((lesson) => {
       const key = `${dateToTimeStr(lesson.startsAt)}-${dateToTimeStr(
-        lesson.endsAt
+        lesson.endsAt,
       )}`;
       const prevHoraries = horariesMap.get(key);
       const lessonHorary: ScheduleHorary = {
@@ -34,7 +34,7 @@ export function tabulateSchedule(schedules: Schedules) {
 
       horariesMap.set(
         key,
-        prevHoraries ? [...prevHoraries, lessonHorary] : [lessonHorary]
+        prevHoraries ? [...prevHoraries, lessonHorary] : [lessonHorary],
       );
     });
   });
