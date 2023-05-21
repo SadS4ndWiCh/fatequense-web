@@ -1,10 +1,10 @@
-import { notFound } from 'next/navigation';
+import { notFound } from "next/navigation";
 
-import { Check, Hourglass, X } from 'lucide-react';
+import { Check, Hourglass, X } from "lucide-react";
 
-import { getCurrentUser } from '~/lib/session';
-import { getStudentHistory } from '~/lib/student';
-import { cn } from '~/lib/utils';
+import { getCurrentUser } from "~/lib/session";
+import { getStudentHistory } from "~/lib/student";
+import { cn } from "~/lib/utils";
 
 export async function StudentHistoryTable() {
   const user = await getCurrentUser();
@@ -40,20 +40,20 @@ export async function StudentHistoryTable() {
               <td className="px-6 py-4">
                 <div
                   className={cn(
-                    'flex h-6 w-6 items-center justify-center rounded-full p-1',
+                    "flex h-6 w-6 items-center justify-center rounded-full p-1",
                     {
-                      'bg-green-50 text-green-600': history.isApproved,
-                      'bg-yellow-50 text-yellow-600':
-                        history.description === 'Em Curso',
-                      'bg-red-50 text-red-600':
+                      "bg-green-50 text-green-600": history.isApproved,
+                      "bg-yellow-50 text-yellow-600":
+                        history.description === "Em Curso",
+                      "bg-red-50 text-red-600":
                         !history.isApproved &&
-                        history.description !== 'Em Curso',
+                        history.description !== "Em Curso",
                     },
                   )}
                 >
                   {history.isApproved ? (
                     <Check className="h-4 w-4" />
-                  ) : history.description === 'Em Curso' ? (
+                  ) : history.description === "Em Curso" ? (
                     <Hourglass className="h-4 w-4" />
                   ) : (
                     <X className="h-4 w-4" />

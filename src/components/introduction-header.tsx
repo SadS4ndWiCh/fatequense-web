@@ -1,9 +1,9 @@
-import { getCurrentUser } from '~/lib/session';
+import { getCurrentUser } from "~/lib/session";
 
 export async function IntroductionHeader() {
   const user = await getCurrentUser();
 
-  const name = user!.name.split(' ').slice(0, 2).join(' ');
+  const name = user!.name.split(" ").slice(0, 2).join(" ");
 
   return (
     <header className="relative rounded-md bg-red-50 p-8">

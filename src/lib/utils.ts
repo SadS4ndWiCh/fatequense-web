@@ -1,15 +1,15 @@
-import { ClassValue, clsx } from 'clsx';
-import dayjs from 'dayjs';
-import { twMerge } from 'tailwind-merge';
+import { ClassValue, clsx } from "clsx";
+import dayjs from "dayjs";
+import { twMerge } from "tailwind-merge";
 
-import { Lesson, Schedules, schedulesSchema } from './validators/schedule';
+import { Lesson, Schedules, schedulesSchema } from "./validators/schedule";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
 export function dateToTimeStr(date: string) {
-  return dayjs(date).format('HH:mm');
+  return dayjs(date).format("HH:mm");
 }
 
 type ScheduleHorary = Lesson & {

@@ -1,12 +1,12 @@
-import { ReactNode } from 'react';
+import { ReactNode } from "react";
 
-import { Inter } from 'next/font/google';
+import { Inter } from "next/font/google";
 
-import { siteConfig } from '~/config/site';
+import { siteConfig } from "~/config/site";
 
-import './globals.css';
+import "./globals.css";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: {

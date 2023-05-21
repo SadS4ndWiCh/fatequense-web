@@ -1,13 +1,13 @@
-import { notFound } from 'next/navigation';
+import { notFound } from "next/navigation";
 
-import { getCurrentUser } from '~/lib/session';
-import { getStudentSchedules } from '~/lib/student';
-import { tabulateSchedule } from '~/lib/utils';
+import { getCurrentUser } from "~/lib/session";
+import { getStudentSchedules } from "~/lib/student";
+import { tabulateSchedule } from "~/lib/utils";
 
-import { DisciplineHoverCard } from './discipline-hover-card';
-import * as Table from './ui/table';
+import { DisciplineHoverCard } from "./discipline-hover-card";
+import * as Table from "./ui/table";
 
-const WEEKDAYS = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+const WEEKDAYS = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
 
 export async function StudentScheduleTable() {
   const user = await getCurrentUser();

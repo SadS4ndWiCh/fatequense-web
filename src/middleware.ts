@@ -1,17 +1,17 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 
-import { getToken } from 'next-auth/jwt';
-import { withAuth } from 'next-auth/middleware';
+import { getToken } from "next-auth/jwt";
+import { withAuth } from "next-auth/middleware";
 
 export default withAuth(
   async function middleware(req) {
     const token = await getToken({ req });
     const isAuth = !!token;
-    const isAuthPage = req.nextUrl.pathname.startsWith('/login');
+    const isAuthPage = req.nextUrl.pathname.startsWith("/login");
 
     if (isAuthPage) {
       if (isAuth) {
-        return NextResponse.redirect(new URL('/aluno', req.url));
+        return NextResponse.redirect(new URL("/aluno", req.url));
       }
 
       return null;
@@ -38,5 +38,5 @@ export default withAuth(
 );
 
 export const config = {
-  matcher: ['/aluno/:path*', '/login'],
+  matcher: ["/aluno/:path*", "/login"],
 };

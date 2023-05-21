@@ -1,14 +1,14 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 type CreateFetchProps = {
   baseURL?: string;
 };
 
-type Options = Omit<RequestInit, 'body'> & {
+type Options = Omit<RequestInit, "body"> & {
   data?: any;
 };
 
-export function createFetch({ baseURL = '' }: CreateFetchProps) {
+export function createFetch({ baseURL = "" }: CreateFetchProps) {
   return {
     get: async <TDataSchema>(
       schema: z.ZodType<TDataSchema>,
@@ -16,7 +16,7 @@ export function createFetch({ baseURL = '' }: CreateFetchProps) {
       options: Options,
     ) => {
       const res = await fetch(baseURL + path, {
-        method: 'GET',
+        method: "GET",
         ...options,
       });
 
@@ -31,9 +31,9 @@ export function createFetch({ baseURL = '' }: CreateFetchProps) {
       options: Options,
     ) => {
       const res = await fetch(baseURL + path, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           ...options.headers,
         },
         body: JSON.stringify(options.data),
@@ -51,9 +51,9 @@ export function createFetch({ baseURL = '' }: CreateFetchProps) {
       options: Options,
     ) => {
       const res = await fetch(baseURL + path, {
-        method: 'PATCH',
+        method: "PATCH",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           ...options.headers,
         },
         body: JSON.stringify(options.data),

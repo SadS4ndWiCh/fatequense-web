@@ -1,7 +1,7 @@
-import { StudentPartialAbsencesTable } from '~/components/student-partial-absences-table';
+import { StudentPartialAbsencesTable } from "~/components/student-partial-absences-table";
 
 export const metadata = {
-  title: 'Faltas Parciais',
+  title: "Faltas Parciais",
 };
 
 export default function PartialAbsences() {

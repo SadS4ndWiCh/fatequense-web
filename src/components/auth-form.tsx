@@ -1,19 +1,19 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams } from "next/navigation";
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { signIn } from 'next-auth/react';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { signIn } from "next-auth/react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
-import { studentAuthSchema } from '~/lib/validators/student-auth';
+import { studentAuthSchema } from "~/lib/validators/student-auth";
 
-import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { Label } from './ui/label';
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
 
 type FormData = z.infer<typeof studentAuthSchema>;
 
@@ -32,9 +32,9 @@ export function AuthForm() {
   async function onSubmit(data: FormData) {
     setLoading(true);
 
-    await signIn('credentials', {
+    await signIn("credentials", {
       ...data,
-      callbackUrl: searchParams?.get('from') || '/aluno',
+      callbackUrl: searchParams?.get("from") || "/aluno",
     });
 
     setLoading(false);
@@ -51,7 +51,7 @@ export function AuthForm() {
             type="text"
             autoCapitalize="none"
             autoCorrect="off"
-            {...register('username')}
+            {...register("username")}
           />
 
           {errors?.username && (
@@ -68,7 +68,7 @@ export function AuthForm() {
             type="password"
             autoCapitalize="none"
             autoCorrect="off"
-            {...register('password')}
+            {...register("password")}
           />
 
           {errors?.password && (

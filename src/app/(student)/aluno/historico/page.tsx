@@ -1,7 +1,7 @@
-import { StudentHistoryTable } from '~/components/student-history-table';
+import { StudentHistoryTable } from "~/components/student-history-table";
 
 export const metadata = {
-  title: 'Histórico',
+  title: "Histórico",
 };
 
 export default async function History() {

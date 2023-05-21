@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { ComponentProps, useState } from 'react';
+import { ComponentProps, useState } from "react";
 
-import { Check, Copy } from 'lucide-react';
+import { Check, Copy } from "lucide-react";
 
-import useCopyToClipboard from '~/hooks/use-copy-to-clipboard';
+import useCopyToClipboard from "~/hooks/use-copy-to-clipboard";
 
-import { cn } from '~/lib/utils';
+import { cn } from "~/lib/utils";
 
-import { Button } from './ui/button';
-import { useToast } from './ui/use-toast';
+import { Button } from "./ui/button";
+import { useToast } from "./ui/use-toast";
 
 type Props = ComponentProps<typeof Button> & {
   content: string;
@@ -39,7 +39,7 @@ export function CopyButton({ content, className, children, ...rest }: Props) {
       variant="outline"
       size="sm"
       onClick={handleCopyedToClipboard}
-      className={cn('flex items-center justify-between', className)}
+      className={cn("flex items-center justify-between", className)}
       {...rest}
     >
       {children}

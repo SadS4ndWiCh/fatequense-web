@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
-import NextAuth from 'next-auth';
+import NextAuth from "next-auth";
 
-declare module 'next-auth' {
+declare module "next-auth" {
   interface Session {
     user: {
       ra: string;
@@ -17,7 +17,7 @@ declare module 'next-auth' {
   }
 }
 
-declare module 'next-auth/jwt' {
+declare module "next-auth/jwt" {
   interface DefaultJWT {
     ra: string;
     accessToken: string;

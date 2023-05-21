@@ -1,16 +1,16 @@
-import Link from 'next/link';
+import Link from "next/link";
 
-import { AlertCircle, Github, GraduationCap, User } from 'lucide-react';
+import { AlertCircle, Github, GraduationCap, User } from "lucide-react";
 
-import { siteConfig } from '~/config/site';
+import { siteConfig } from "~/config/site";
 
-import { cn } from '~/lib/utils';
+import { cn } from "~/lib/utils";
 
-import { buttonVariants } from '~/components/ui/button';
+import { buttonVariants } from "~/components/ui/button";
 
 export default function Home() {
   return (
-    <main className="mx-auto p-4 md:p-0 grid min-h-screen max-w-lg place-content-center space-y-6">
+    <main className="mx-auto grid min-h-screen max-w-lg place-content-center space-y-6 p-4 md:p-0">
       <section className="">
         <div className="mb-4 w-fit rounded-md bg-red-50 p-4">
           <GraduationCap className="h-5 w-5 text-red-600" />
@@ -22,10 +22,10 @@ export default function Home() {
             fatec, feita com carinho de fatequense para fatequenses.
           </p>
         </div>
-        <div className="flex flex-col md:flex-row items-center justify-between gap-2">
+        <div className="flex flex-col items-center justify-between gap-2 md:flex-row">
           <Link
             href="/login"
-            className={cn('w-full md:w-fit', buttonVariants())}
+            className={cn("w-full md:w-fit", buttonVariants())}
           >
             <User className="mr-2 h-5 w-5" />
             <span>Entrar como estudante</span>
@@ -35,8 +35,8 @@ export default function Home() {
             target="_blank"
             rel="noreferer noreferrer"
             className={cn(
-              'w-full md:w-fit',
-              buttonVariants({ variant: 'outline' }),
+              "w-full md:w-fit",
+              buttonVariants({ variant: "outline" }),
             )}
           >
             <Github className="mr-2 h-5 w-5" />
@@ -54,7 +54,7 @@ export default function Home() {
 
           <p>
             O site pode parar a qualquer momento dependendo das atualizações no
-            SIGA,{' '}
+            SIGA,{" "}
             <em className="line-through">mesmo que possívelmente não haverá</em>
             , mas farei o possível para atualizar o mais rápido possível
           </p>

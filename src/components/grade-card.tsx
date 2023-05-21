@@ -1,4 +1,4 @@
-import { Grade } from '~/lib/validators/partial-grades';
+import { Grade } from "~/lib/validators/partial-grades";
 
 type Props = {
   data: Grade;
@@ -6,26 +6,26 @@ type Props = {
 
 export function GradeCard({ data }: Props) {
   return (
-    <article className="relative max-w-[230px] p-4 mb-6 rounded-md shadow">
-      <header className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
-        <div className="grid place-content-center w-10 h-10 p-2 rounded-md bg-zinc-900 text-white">
+    <article className="relative mb-6 max-w-[230px] rounded-md p-4 shadow">
+      <header className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2">
+        <div className="grid h-10 w-10 place-content-center rounded-md bg-zinc-900 p-2 text-white">
           <span className="font-bold">{data.averageGrade}</span>
         </div>
       </header>
 
       <div className="my-4 text-center">
         <span className="text-sm">{data.cod}</span>
-        <h4 className="font-bold truncate">{data.disciplineName}</h4>
+        <h4 className="truncate font-bold">{data.disciplineName}</h4>
       </div>
 
       <footer className="flex items-center gap-2">
         {data.examsDates.map((exam) => (
           <div
             key={`${data.cod}-${exam.startsAt}`}
-            className="relative grid place-content-center flex-1 min-w-[40px] h-10 p-2 rounded-md bg-zinc-50 text-zinc-900"
+            className="relative grid h-10 min-w-[40px] flex-1 place-content-center rounded-md bg-zinc-50 p-2 text-zinc-900"
           >
             <p className="font-bold">{exam.grade}</p>
-            <span className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-3 inline-block px-2 py-1 rounded-sm bg-zinc-700 text-white leading-none text-xs">
+            <span className="absolute bottom-0 left-1/2 inline-block -translate-x-1/2 translate-y-3 rounded-sm bg-zinc-700 px-2 py-1 text-xs leading-none text-white">
               {exam.title}
             </span>
           </div>

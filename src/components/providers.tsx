@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { ReactNode } from 'react';
+import { ReactNode } from "react";
 
-import { Session } from 'next-auth';
-import { SessionProvider } from 'next-auth/react';
+import { Session } from "next-auth";
+import { SessionProvider } from "next-auth/react";
 
 type Props = {
   session: Session;
