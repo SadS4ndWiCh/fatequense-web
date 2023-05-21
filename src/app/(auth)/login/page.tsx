@@ -9,12 +9,9 @@ export const metadata = {
 export default async function Login() {
   return (
     <main className="flex h-screen flex-col items-center justify-center gap-4 overflow-y-hidden px-4 md:px-0">
-      <div className="absolute left-96 top-14 -z-10 hidden h-52 w-52 animate-pulse rounded-full bg-red-600 opacity-40 blur-3xl md:block" />
-      <div className="absolute -bottom-24 right-96 -z-10 hidden h-64 w-64 animate-pulse rounded-full bg-fuchsia-600 opacity-40 blur-3xl md:block" />
-
       <div className="max-w-sm text-center">
-        <div className="mx-auto mb-4 w-fit rounded-md bg-red-50 p-4">
-          <GraduationCap className="h-5 w-5 text-red-600" />
+        <div className="mx-auto mb-4 rounded-md bg-red-50 text-red-600 dark:bg-red-600 p-4 dark:text-red-50 w-fit">
+          <GraduationCap className="h-5 w-5" />
         </div>
         <h1 className="text-2xl font-bold">Bem vindo de volta</h1>
         <p>

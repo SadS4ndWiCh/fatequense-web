@@ -27,7 +27,7 @@ export default async function Profile() {
         <p>Veja dados do seu perfil de estudante</p>
       </header>
 
-      <div className="mt-8 flex flex-col gap-8 md:flex-row md:gap-4">
+      <div className="mt-8 flex flex-col gap-8 md:flex-row md:justify-between md:gap-4">
         <section>
           <StudentProfileCard user={user} />
 

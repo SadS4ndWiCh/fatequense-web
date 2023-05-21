@@ -22,8 +22,8 @@ export async function StudentTodaySchedule() {
   if (todaySchedules.length === 0) {
     return (
       <div className="w-[280px]">
-        <div className="mb-4 w-fit rounded-md bg-red-50 p-4">
-          <PartyPopper className="h-5 w-5 text-red-600" />
+        <div className="mb-4 w-fit rounded-md bg-red-50 p-4 dark:bg-red-600">
+          <PartyPopper className="h-5 w-5 text-red-600 dark:text-red-50" />
         </div>
 
         <h2 className="text-xl font-bold">Hoje não tem aula</h2>

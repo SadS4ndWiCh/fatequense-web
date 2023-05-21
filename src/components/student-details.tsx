@@ -14,11 +14,11 @@ export async function StudentDetails() {
   const profile = await getStudentProfile({ user });
 
   return (
-    <section className="flex flex-col gap-6 sm:flex-row">
+    <section className="flex flex-col gap-6 lg:flex-row">
       <DetailCard.Root>
         <DetailCard.Header>
-          <DetailCard.HeaderIcon className="bg-blue-50">
-            <Award className="h-5 w-5 text-blue-600" />
+          <DetailCard.HeaderIcon className="bg-blue-50 dark:bg-blue-600">
+            <Award className="h-5 w-5 text-blue-600 dark:text-blue-50" />
           </DetailCard.HeaderIcon>
           <DetailCard.HeaderContent>
             <h2 className="font-medium">Rendimento no curso</h2>
@@ -31,8 +31,8 @@ export async function StudentDetails() {
       </DetailCard.Root>
       <DetailCard.Root>
         <DetailCard.Header>
-          <DetailCard.HeaderIcon className="bg-green-50">
-            <Rocket className="h-5 w-5 text-green-600" />
+          <DetailCard.HeaderIcon className="bg-green-50 dark:bg-green-600">
+            <Rocket className="h-5 w-5 text-green-600 dark:text-green-50" />
           </DetailCard.HeaderIcon>
           <DetailCard.HeaderContent>
             <h2 className="font-medium">Progressão do curso</h2>
@@ -48,8 +48,8 @@ export async function StudentDetails() {
       </DetailCard.Root>
       <DetailCard.Root>
         <DetailCard.Header>
-          <DetailCard.HeaderIcon className="bg-fuchsia-50">
-            <Wine className="h-5 w-5 text-fuchsia-600" />
+          <DetailCard.HeaderIcon className="bg-fuchsia-50 dark:bg-fuchsia-600">
+            <Wine className="h-5 w-5 text-fuchsia-600 dark:text-fuchsia-50" />
           </DetailCard.HeaderIcon>
           <DetailCard.HeaderContent>
             <h2 className="font-medium">Cursados</h2>

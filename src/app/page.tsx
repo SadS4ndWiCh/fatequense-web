@@ -12,11 +12,13 @@ export default function Home() {
   return (
     <main className="mx-auto grid min-h-screen max-w-lg place-content-center space-y-6 p-4 md:p-0">
       <section className="">
-        <div className="mb-4 w-fit rounded-md bg-red-50 p-4">
-          <GraduationCap className="h-5 w-5 text-red-600" />
+        <div className="mb-4 w-fit rounded-md bg-red-50 text-red-600 dark:bg-red-600 dark:text-red-50 p-4">
+          <GraduationCap className="h-5 w-5" />
         </div>
         <div className="mb-4 space-y-2">
-          <h1 className="text-3xl font-bold">Fatequense</h1>
+          <h1 className="text-4xl font-bold bg-gradient-to-b from-red-50 to-red-600 bg-clip-text text-transparent">
+            Fatequense
+          </h1>
           <p className="text-lg">
             Uma plataforma para visualizar os dados de estudante dos alunos da
             fatec, feita com carinho de fatequense para fatequenses.
@@ -46,7 +48,7 @@ export default function Home() {
       </section>
 
       <section className="space-y-4">
-        <div className="space-y-2 rounded-md bg-yellow-50 p-4 text-yellow-600">
+        <div className="space-y-2 rounded-md bg-yellow-50 p-4 text-yellow-600 dark:bg-yellow-600 dark:text-yellow-50">
           <div className="flex items-center gap-2">
             <AlertCircle className="h-5 w-5" />
             <span className="text-sm">Atenção</span>

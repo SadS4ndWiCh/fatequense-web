@@ -21,7 +21,7 @@ export default async function EditProfile() {
       <header>
         <h1 className="text-3xl font-bold">Editar Perfil</h1>
         <p>Edite informações do seu perfil de estudante</p>
-        <div className="mt-2 space-y-2 rounded-md bg-yellow-50 p-4 text-yellow-600">
+        <div className="mt-2 space-y-2 rounded-md bg-yellow-50 p-4 text-yellow-600 dark:bg-yellow-600 dark:text-yellow-50">
           <div className="flex items-center gap-2">
             <AlertCircle className="h-5 w-5" />
             <span className="text-sm">Atenção</span>
