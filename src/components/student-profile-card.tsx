@@ -1,16 +1,16 @@
-import { Session } from 'next-auth';
+import { Session } from "next-auth";
 
-import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 
-import { CopyButton } from '~/components/copy-button';
+import { CopyButton } from "~/components/copy-button";
 
 type Props = {
-  user: Session['user'];
+  user: Session["user"];
 };
 
 export function StudentProfileCard({ user }: Props) {
   return (
-    <section className="flex w-[265px] flex-col items-center rounded-md gap-2">
+    <section className="flex flex-col items-center gap-2 rounded-md md:w-[265px]">
       <Avatar className="h-32 w-32">
         <AvatarImage src={user.picture} alt={user.name} />
         <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>

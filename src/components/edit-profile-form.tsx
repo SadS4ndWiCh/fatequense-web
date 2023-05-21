@@ -1,27 +1,27 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Label } from '@radix-ui/react-label';
-import { Session } from 'next-auth';
-import { useSession } from 'next-auth/react';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Label } from "@radix-ui/react-label";
+import { Session } from "next-auth";
+import { useSession } from "next-auth/react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
-import { editStudentProfile } from '~/lib/student';
-import { profileEditSchema } from '~/lib/validators/profile-edit';
+import { editStudentProfile } from "~/lib/student";
+import { profileEditSchema } from "~/lib/validators/profile-edit";
 
-import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { toast } from './ui/use-toast';
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { toast } from "./ui/use-toast";
 
 type FormData = z.infer<typeof profileEditSchema>;
 
 type Props = {
-  user: Session['user'];
+  user: Session["user"];
 };
 
 export function EditProfileForm({ user }: Props) {
@@ -52,15 +52,15 @@ export function EditProfileForm({ user }: Props) {
 
     if (!success) {
       return toast({
-        title: 'Ocorreu algum problema.',
+        title: "Ocorreu algum problema.",
         description:
-          'Não foi possível editar o perfil por decorrência de algum problema.',
-        variant: 'destructive',
+          "Não foi possível editar o perfil por decorrência de algum problema.",
+        variant: "destructive",
       });
     }
 
     toast({
-      description: 'Perfil atualizado com sucesso!',
+      description: "Perfil atualizado com sucesso!",
     });
 
     router.refresh();
@@ -70,7 +70,9 @@ export function EditProfileForm({ user }: Props) {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="grid gap-4">
         <div className="flex flex-col gap-2">
-          <Label htmlFor="photoUrl">URL da Foto</Label>
+          <Label htmlFor="photoUrl" className="text-xs">
+            URL da Foto
+          </Label>
           <Input
             id="photoUrl"
             placeholder="Usuário"
@@ -78,7 +80,7 @@ export function EditProfileForm({ user }: Props) {
             autoCapitalize="none"
             autoCorrect="off"
             className="w-full"
-            {...register('photoUrl')}
+            {...register("photoUrl")}
           />
 
           {errors?.photoUrl && (

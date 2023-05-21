@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
+import Link from "next/link";
 
 import {
   CalendarDays,
@@ -10,11 +10,11 @@ import {
   Puzzle,
   Star,
   User,
-} from 'lucide-react';
-import type { Session } from 'next-auth';
-import { signOut } from 'next-auth/react';
+} from "lucide-react";
+import type { Session } from "next-auth";
+import { signOut } from "next-auth/react";
 
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,10 +22,10 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from './ui/dropdown-menu';
+} from "./ui/dropdown-menu";
 
 type Props = {
-  user: Session['user'];
+  user: Session["user"];
 };
 
 export function StudentMenu({ user }: Props) {
@@ -37,7 +37,7 @@ export function StudentMenu({ user }: Props) {
           <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent align="end">
         <div className="flex items-center justify-start gap-2 p-2">
           <div className="flex flex-col space-y-1 leading-none">
             <p className="font-medium">{user.name}</p>
@@ -68,7 +68,7 @@ export function StudentMenu({ user }: Props) {
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild className="cursor-pointer">
-            <Link href="/aluno/horarios">
+            <Link href="/aluno/horario">
               <CalendarDays className="mr-2 h-4 w-4" />
               <span>Horários</span>
             </Link>

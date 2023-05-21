@@ -41,7 +41,7 @@ export function AuthForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-[400px]">
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full sm:w-[400px]">
       <div className="grid gap-4">
         <div className="flex flex-col gap-2">
           <Label htmlFor="username">Usuário</Label>

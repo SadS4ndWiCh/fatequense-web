@@ -1,11 +1,11 @@
-import { notFound } from 'next/navigation';
+import { notFound } from "next/navigation";
 
-import { Award, Rocket, Wine } from 'lucide-react';
+import { Award, Rocket, Wine } from "lucide-react";
 
-import { getCurrentUser } from '~/lib/session';
-import { getStudentProfile } from '~/lib/student';
+import { getCurrentUser } from "~/lib/session";
+import { getStudentProfile } from "~/lib/student";
 
-import * as DetailCard from './detail-card';
+import * as DetailCard from "./detail-card";
 
 export async function StudentDetails() {
   const user = await getCurrentUser();
@@ -14,7 +14,7 @@ export async function StudentDetails() {
   const profile = await getStudentProfile({ user });
 
   return (
-    <section className="flex gap-6">
+    <section className="flex flex-col gap-6 sm:flex-row">
       <DetailCard.Root>
         <DetailCard.Header>
           <DetailCard.HeaderIcon className="bg-blue-50">

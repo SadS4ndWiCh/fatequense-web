@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import { Inter } from 'next/font/google';
 
 import { siteConfig } from '~/config/site';
@@ -14,11 +16,7 @@ export const metadata = {
   description: siteConfig.description,
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="pt-BR">
       <body className={inter.className}>{children}</body>

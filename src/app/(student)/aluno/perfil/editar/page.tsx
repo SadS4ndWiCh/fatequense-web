@@ -1,14 +1,14 @@
-import { notFound } from 'next/navigation';
+import { notFound } from "next/navigation";
 
-import { AlertCircle } from 'lucide-react';
+import { AlertCircle } from "lucide-react";
 
-import { getCurrentUser } from '~/lib/session';
+import { getCurrentUser } from "~/lib/session";
 
-import { EditProfileForm } from '~/components/edit-profile-form';
-import { StudentProfileCard } from '~/components/student-profile-card';
+import { EditProfileForm } from "~/components/edit-profile-form";
+import { StudentProfileCard } from "~/components/student-profile-card";
 
 export const metadata = {
-  title: 'Editar Perfil',
+  title: "Editar Perfil",
 };
 
 export default async function EditProfile() {
@@ -35,7 +35,7 @@ export default async function EditProfile() {
         </div>
       </header>
 
-      <div className="mt-8 flex gap-4">
+      <div className="mt-8 flex flex-col gap-4 md:flex-row">
         <StudentProfileCard user={user} />
 
         <section className="flex-1">

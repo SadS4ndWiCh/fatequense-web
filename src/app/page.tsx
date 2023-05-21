@@ -10,7 +10,7 @@ import { buttonVariants } from '~/components/ui/button';
 
 export default function Home() {
   return (
-    <main className="mx-auto grid min-h-screen max-w-lg place-content-center space-y-6">
+    <main className="mx-auto p-4 md:p-0 grid min-h-screen max-w-lg place-content-center space-y-6">
       <section className="">
         <div className="mb-4 w-fit rounded-md bg-red-50 p-4">
           <GraduationCap className="h-5 w-5 text-red-600" />
@@ -22,8 +22,11 @@ export default function Home() {
             fatec, feita com carinho de fatequense para fatequenses.
           </p>
         </div>
-        <div className="flex items-center justify-between gap-2">
-          <Link href="/login" className={cn(buttonVariants())}>
+        <div className="flex flex-col md:flex-row items-center justify-between gap-2">
+          <Link
+            href="/login"
+            className={cn('w-full md:w-fit', buttonVariants())}
+          >
             <User className="mr-2 h-5 w-5" />
             <span>Entrar como estudante</span>
           </Link>
@@ -31,7 +34,10 @@ export default function Home() {
             href={siteConfig.links.github}
             target="_blank"
             rel="noreferer noreferrer"
-            className={cn(buttonVariants({ variant: 'outline' }))}
+            className={cn(
+              'w-full md:w-fit',
+              buttonVariants({ variant: 'outline' }),
+            )}
           >
             <Github className="mr-2 h-5 w-5" />
             GitHub
