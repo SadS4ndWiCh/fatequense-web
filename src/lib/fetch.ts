@@ -4,6 +4,7 @@ type CreateFetchProps = {
   baseURL?: string;
 };
 
+// eslint-disable-next-line no-undef
 type Options = Omit<RequestInit, "body"> & {
   data?: any;
 };
