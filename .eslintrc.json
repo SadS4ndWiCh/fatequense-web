@@ -3,6 +3,13 @@
     "@rocketseat/eslint-config/react"
   ],
   "rules": {
-    "prettier/prettier": ["error", { "endOfLine": "auto" }]
+    "prettier/prettier": ["error", {
+      "singleQuote": false,
+      "semi": true,
+      "trailingComma": "all",
+      "plugins": [
+        "prettier-plugin-tailwindcss"
+      ]
+    }]
   }
 }
