@@ -18,6 +18,7 @@ type Props = ComponentProps<typeof Button> & {
 export function CopyButton({ content, className, children, ...rest }: Props) {
   const { toast } = useToast();
   const [hasCopyed, setHasCopyed] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [_, copy] = useCopyToClipboard();
 
   const hide = () => setHasCopyed(false);
