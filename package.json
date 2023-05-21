@@ -24,7 +24,6 @@
     "class-variance-authority": "^0.6.0",
     "clsx": "^1.2.1",
     "dayjs": "^1.11.7",
-    "eslint": "8.40.0",
     "eslint-config-next": "13.4.2",
     "jsonwebtoken": "^9.0.0",
     "lucide-react": "^0.219.0",
@@ -45,6 +44,7 @@
     "@rocketseat/eslint-config": "^1.2.0",
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@types/jsonwebtoken": "^9.0.2",
+    "eslint": "8.40.0",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.3.0"
   }
