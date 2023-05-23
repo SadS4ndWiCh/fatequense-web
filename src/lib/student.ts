@@ -8,7 +8,7 @@ import { historySchema } from "./validators/history";
 import { partialAbsencesSchema } from "./validators/partial-absences";
 import { partialGradesSchema } from "./validators/partial-grades";
 import { profileSchema } from "./validators/profile";
-import { ProfileEdit } from "./validators/profile-edit";
+import { ProfileEdit, profileEditSchema } from "./validators/profile-edit";
 import { schedulesSchema } from "./validators/schedule";
 
 type Props = {
@@ -90,11 +90,13 @@ type EditStudentProfileProps = Props & {
 
 export const editStudentProfile = cache(
   async ({ user, data }: EditStudentProfileProps) => {
+    const parsedData = profileEditSchema.parse(data);
+
     const { res } = await api.patch(z.any(), "/student/profile/edit", {
       headers: {
         Authorization: `Bearer ${user.accessToken}`,
       },
-      data,
+      data: parsedData,
     });
 
     return res.ok;
