@@ -4,7 +4,28 @@ import { getCurrentUser } from "~/lib/session";
 import { getStudentPartialGrades } from "~/lib/student";
 import { cn } from "~/lib/utils";
 
-import * as Table from "./ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "./ui/table";
+
+function Grade({ grade }: { grade: number }) {
+  return (
+    <span
+      className={cn("rounded-full px-3 py-1", {
+        "bg-green-50 text-green-600 dark:bg-green-600 dark:text-green-50":
+          grade >= 6,
+        "bg-red-50 text-red-600 dark:bg-red-600 dark:text-red-50": grade < 6,
+      })}
+    >
+      {grade}
+    </span>
+  );
+}
 
 export async function StudentPartialGrades() {
   const user = await getCurrentUser();
@@ -22,46 +43,48 @@ export async function StudentPartialGrades() {
   });
 
   return (
-    <Table.Root>
-      <Table.Head>
-        <Table.Row>
-          <Table.Column>Sigla</Table.Column>
-          <Table.Column>Disciplina</Table.Column>
-          <Table.Column>P1</Table.Column>
-          <Table.Column>P2</Table.Column>
-          <Table.Column>P3</Table.Column>
-          <Table.Column>Média</Table.Column>
-        </Table.Row>
-      </Table.Head>
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Sigla</TableHead>
+          <TableHead>Disciplina</TableHead>
+          <TableHead className="text-center">P1</TableHead>
+          <TableHead className="text-center">P2</TableHead>
+          <TableHead className="text-center">P3</TableHead>
+          <TableHead className="text-center">Média</TableHead>
+        </TableRow>
+      </TableHeader>
 
-      <Table.Body>
+      <TableBody>
         {sortedExamsGrades.map((grade, i) => (
-          <Table.Row
-            key={grade.cod}
-            className="border-b bg-white dark:border-gray-700 dark:bg-gray-800"
-          >
-            <Table.Data className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white">
-              {grade.cod}
-            </Table.Data>
-            <Table.Data>{grade.disciplineName}</Table.Data>
+          <TableRow key={grade.cod}>
+            <TableCell>{grade.cod}</TableCell>
+            <TableCell>{grade.disciplineName}</TableCell>
             {grade.examsDates.map((exams) => (
-              <Table.Data key={`${grade.cod}-${exams?.title}`}>
-                {exams?.grade}
-              </Table.Data>
+              <TableCell
+                key={`${grade.cod}-${exams?.title}`}
+                className="text-center"
+              >
+                {/* {exams?.grade} */}
+                <Grade grade={exams?.grade || 0} />
+              </TableCell>
             ))}
-            <Table.Data>
-              <span
+            <TableCell className="text-center">
+              {/* <span
                 className={cn("rounded-full px-3 py-1", {
-                  "bg-green-50 text-green-600": grade.averageGrade >= 6,
-                  "bg-red-50 text-red-600": grade.averageGrade < 6,
+                  "bg-green-50 text-green-600 dark:bg-green-600 dark:text-green-600":
+                    grade.averageGrade >= 6,
+                  "bg-red-50 text-red-600 dark:bg-red-600 dark:text-red-50":
+                    grade.averageGrade < 6,
                 })}
               >
                 {grade.averageGrade}
-              </span>
-            </Table.Data>
-          </Table.Row>
+              </span> */}
+              <Grade grade={grade.averageGrade} />
+            </TableCell>
+          </TableRow>
         ))}
-      </Table.Body>
-    </Table.Root>
+      </TableBody>
+    </Table>
   );
 }

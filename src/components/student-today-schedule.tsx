@@ -43,7 +43,7 @@ export async function StudentTodaySchedule() {
             <time dateTime={schedule.startsAt} className="text-sm">
               às {formatHour(schedule.startsAt)}
             </time>
-            <div className="mt-2 rounded-md bg-zinc-50 p-4">
+            <div className="mt-2 rounded-md bg-zinc-50 p-4 dark:bg-gray-900">
               <span className="text-sm">{schedule.cod}</span>
               <p className="truncate">{schedule.discipline.name}</p>
             </div>
