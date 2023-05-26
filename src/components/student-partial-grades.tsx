@@ -17,9 +17,9 @@ function Grade({ grade }: { grade: number }) {
   return (
     <span
       className={cn("rounded-full px-3 py-1", {
-        "bg-green-50 text-green-600 dark:bg-green-600 dark:text-green-50":
+        "bg-green-50 text-green-600 dark:bg-green-500 dark:text-green-50":
           grade >= 6,
-        "bg-red-50 text-red-600 dark:bg-red-600 dark:text-red-50": grade < 6,
+        "bg-red-50 text-red-600 dark:bg-red-500 dark:text-red-50": grade < 6,
       })}
     >
       {grade}
@@ -56,30 +56,19 @@ export async function StudentPartialGrades() {
       </TableHeader>
 
       <TableBody>
-        {sortedExamsGrades.map((grade, i) => (
+        {sortedExamsGrades.map((grade) => (
           <TableRow key={grade.cod}>
             <TableCell>{grade.cod}</TableCell>
             <TableCell>{grade.disciplineName}</TableCell>
-            {grade.examsDates.map((exams) => (
+            {grade.examsDates.map((exams, i) => (
               <TableCell
-                key={`${grade.cod}-${exams?.title}`}
+                key={`${grade.cod}-${exams?.title || i}`}
                 className="text-center"
               >
-                {/* {exams?.grade} */}
                 <Grade grade={exams?.grade || 0} />
               </TableCell>
             ))}
             <TableCell className="text-center">
-              {/* <span
-                className={cn("rounded-full px-3 py-1", {
-                  "bg-green-50 text-green-600 dark:bg-green-600 dark:text-green-600":
-                    grade.averageGrade >= 6,
-                  "bg-red-50 text-red-600 dark:bg-red-600 dark:text-red-50":
-                    grade.averageGrade < 6,
-                })}
-              >
-                {grade.averageGrade}
-              </span> */}
               <Grade grade={grade.averageGrade} />
             </TableCell>
           </TableRow>

@@ -48,7 +48,7 @@ export default function Home() {
       </section>
 
       <section className="space-y-4">
-        <div className="space-y-2 rounded-md bg-yellow-50 p-4 text-yellow-600 dark:bg-yellow-600 dark:text-yellow-50">
+        <div className="space-y-2 rounded-md bg-yellow-50 p-4 border-2 border-transparent dark:border-yellow-500 text-yellow-600 dark:bg-transparent dark:text-yellow-500">
           <div className="flex items-center gap-2">
             <AlertCircle className="h-5 w-5" />
             <span className="text-sm">Atenção</span>

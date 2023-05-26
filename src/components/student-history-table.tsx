@@ -47,11 +47,11 @@ export async function StudentHistoryTable() {
                 className={cn(
                   "flex h-6 w-6 mx-auto items-center justify-center rounded-full p-1",
                   {
-                    "bg-green-50 text-green-600 dark:bg-green-600 dark:text-green-50":
+                    "bg-green-50 text-green-600 dark:bg-green-500 dark:text-green-50":
                       history.isApproved,
-                    "bg-yellow-50 text-yellow-600 dark:bg-yellow-600 dark:text-yellow-50":
+                    "bg-yellow-50 text-yellow-600 dark:bg-yellow-500 dark:text-yellow-50":
                       history.description === "Em Curso",
-                    "bg-red-50 text-red-600 dark:bg-red-600 dark:text-red-50":
+                    "bg-red-50 text-red-600 dark:bg-red-500 dark:text-red-50":
                       !history.isApproved && history.description !== "Em Curso",
                   },
                 )}

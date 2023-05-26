@@ -16,7 +16,7 @@ export async function Sidebar() {
       <section className="flex-1 space-y-6 divide-y">
         <header className="flex md:justify-center">
           <Link href="/aluno">
-            <div className="w-fit rounded-md bg-red-50 p-4 dark:bg-red-600">
+            <div className="w-fit rounded-md bg-red-50 p-4 dark:bg-red-500">
               <GraduationCap className="h-5 w-5 text-red-600 dark:text-red-50" />
             </div>
           </Link>
