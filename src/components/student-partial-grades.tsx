@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 
 import { getCurrentUser } from "~/lib/session";
 import { getStudentPartialGrades } from "~/lib/student";
-import { cn } from "~/lib/utils";
+import { cn, dateFormat } from "~/lib/utils";
 
 import {
   Table,
@@ -16,7 +16,7 @@ import {
 function Grade({ grade }: { grade: number }) {
   return (
     <span
-      className={cn("rounded-full px-3 py-1", {
+      className={cn("w-fit rounded-full px-3 py-1", {
         "bg-green-50 text-green-600 dark:bg-green-500 dark:text-green-50":
           grade >= 6,
         "bg-red-50 text-red-600 dark:bg-red-500 dark:text-red-50": grade < 6,
@@ -65,7 +65,15 @@ export async function StudentPartialGrades() {
                 key={`${grade.cod}-${exams?.title || i}`}
                 className="text-center"
               >
-                <Grade grade={exams?.grade || 0} />
+                <div className="flex flex-col gap-2 items-center">
+                  <Grade grade={exams?.grade || 0} />
+
+                  {exams?.startsAt && (
+                    <time dateTime={exams.startsAt} className="text-xs">
+                      {dateFormat(exams.startsAt)}
+                    </time>
+                  )}
+                </div>
               </TableCell>
             ))}
             <TableCell className="text-center">
