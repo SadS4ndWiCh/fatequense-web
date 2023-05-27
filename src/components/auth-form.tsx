@@ -5,15 +5,25 @@ import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { LoaderIcon } from "lucide-react";
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { studentAuthSchema } from "~/lib/validators/student-auth";
 
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "~/components/ui/form";
+
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { Label } from "./ui/label";
 
 type FormData = z.infer<typeof studentAuthSchema>;
 
@@ -21,11 +31,7 @@ export function AuthForm() {
   const [loading, setLoading] = useState(false);
   const searchParams = useSearchParams();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>({
+  const form = useForm<FormData>({
     resolver: zodResolver(studentAuthSchema),
   });
 
@@ -41,45 +47,57 @@ export function AuthForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-full sm:w-[400px]">
-      <div className="grid gap-4">
-        <div className="flex flex-col gap-2">
-          <Label htmlFor="username">Usuário</Label>
-          <Input
-            id="username"
-            placeholder="Usuário"
-            type="text"
-            autoCapitalize="none"
-            autoCorrect="off"
-            {...register("username")}
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="w-full sm:w-[400px]"
+      >
+        <div className="space-y-2">
+          <FormField
+            control={form.control}
+            name="username"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Usuário</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Usuário"
+                    type="text"
+                    autoCapitalize="none"
+                    autoCorrect="off"
+                    {...field}
+                  />
+                </FormControl>
+                <FormDescription>
+                  Seu usuário no SIGA, geralmente sendo seu CPF
+                </FormDescription>
+
+                <FormMessage />
+              </FormItem>
+            )}
           />
 
-          {errors?.username && (
-            <p className="px-1 text-xs text-red-600">
-              {errors.username.message}
-            </p>
-          )}
-        </div>
-        <div className="flex flex-col gap-2">
-          <Label htmlFor="password">Senha</Label>
-          <Input
-            id="password"
-            placeholder="Senha"
-            type="password"
-            autoCapitalize="none"
-            autoCorrect="off"
-            {...register("password")}
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Senha</FormLabel>
+                <FormControl>
+                  <Input placeholder="********" type="password" {...field} />
+                </FormControl>
+                <FormDescription>Sua senha super segura</FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-
-          {errors?.password && (
-            <p className="px-1 text-xs text-red-600">
-              {errors.password.message}
-            </p>
-          )}
         </div>
 
-        <Button disabled={loading}>Entrar com o SIGA</Button>
-      </div>
-    </form>
+        <Button disabled={loading} className="w-full mt-6">
+          {loading && <LoaderIcon className="mr-2 w-4 h-4 animate-spin" />}
+          <span>Entrar com o SIGA</span>
+        </Button>
+      </form>
+    </Form>
   );
 }

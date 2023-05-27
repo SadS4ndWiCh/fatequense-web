@@ -30,7 +30,7 @@ export default async function EditProfile() {
           <p>
             As informações realizadas aqui não possuem efeito no site do SIGA
             verdadeiro. As modificações aqui são salvas em um banco de dados a
-            parte do SIGA, portanto, evite colocar qualquer informação sencível.
+            parte do SIGA, portanto, evite colocar qualquer informação sensível.
           </p>
         </div>
       </header>

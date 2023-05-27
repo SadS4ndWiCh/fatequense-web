@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Label } from "@radix-ui/react-label";
+import { LoaderIcon } from "lucide-react";
 import { Session } from "next-auth";
 import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
@@ -13,6 +13,16 @@ import { z } from "zod";
 
 import { editStudentProfile } from "~/lib/student";
 import { profileEditSchema } from "~/lib/validators/profile-edit";
+
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "~/components/ui/form";
 
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -30,11 +40,7 @@ export function EditProfileForm({ user }: Props) {
 
   const [loading, setLoading] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>({
+  const form = useForm<FormData>({
     resolver: zodResolver(profileEditSchema),
     defaultValues: {
       photoUrl: user.picture,
@@ -48,8 +54,6 @@ export function EditProfileForm({ user }: Props) {
 
     setLoading(false);
 
-    await updateSession({ picture: data.photoUrl });
-
     if (!success) {
       return toast({
         title: "Ocorreu algum problema.",
@@ -59,6 +63,8 @@ export function EditProfileForm({ user }: Props) {
       });
     }
 
+    await updateSession({ picture: data.photoUrl });
+
     toast({
       description: "Perfil atualizado com sucesso!",
     });
@@ -67,33 +73,34 @@ export function EditProfileForm({ user }: Props) {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="grid gap-4">
-        <div className="flex flex-col gap-2">
-          <Label htmlFor="photoUrl" className="text-xs">
-            URL da Foto
-          </Label>
-          <Input
-            id="photoUrl"
-            placeholder="Usuário"
-            type="url"
-            autoCapitalize="none"
-            autoCorrect="off"
-            className="w-full"
-            {...register("photoUrl")}
-          />
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+        <FormField
+          control={form.control}
+          name="photoUrl"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>URL do Avatar</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Usuário"
+                  type="url"
+                  className="w-full"
+                  {...field}
+                />
+              </FormControl>
+              <FormDescription>A URL de alguma imagem</FormDescription>
 
-          {errors?.photoUrl && (
-            <p className="px-1 text-xs text-red-600">
-              {errors.photoUrl.message}
-            </p>
+              <FormMessage />
+            </FormItem>
           )}
-        </div>
+        />
 
-        <Button className="w-full" disabled={loading}>
-          Salvar alterações
+        <Button className="w-full mt-6" disabled={loading}>
+          {loading && <LoaderIcon className="w-4 h-4 mr-2 animate-spin" />}
+          <span>Salvar alterações</span>
         </Button>
-      </div>
-    </form>
+      </form>
+    </Form>
   );
 }
