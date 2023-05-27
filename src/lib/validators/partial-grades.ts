@@ -1,19 +1,8 @@
 import { z } from "zod";
 
-/*
-cod: z.;
-disciplineName: string;
-averageGrade: number;
-examsDates: {
-	title: string;
-	startsAt: string;
-	grade: number;
-}
-*/
-
 export const examSchema = z.object({
   title: z.string(),
-  startsAt: z.string().datetime(),
+  startsAt: z.string().datetime().nullish(),
   grade: z.number(),
 });
 
