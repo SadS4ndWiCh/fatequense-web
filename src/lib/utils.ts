@@ -12,6 +12,10 @@ export function dateToTimeStr(date: string) {
   return dayjs(date).format("HH:mm");
 }
 
+export function dateFormat(date: string) {
+  return dayjs(date).format("DD/MM/YYYY");
+}
+
 type ScheduleHorary = Lesson & {
   weekday: number;
 };
