@@ -44,7 +44,6 @@ export default async function Profile() {
         </section>
 
         <section>
-          {/* @ts-expect-error Async Server Component */}
           <StudentDetails />
         </section>
       </div>

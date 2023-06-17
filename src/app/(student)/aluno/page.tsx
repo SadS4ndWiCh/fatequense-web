@@ -10,17 +10,14 @@ export default function Student() {
   return (
     <div className="flex h-full flex-col gap-6 md:flex-row md:divide-x">
       <section className="flex-1 space-y-6">
-        {/* @ts-expect-error Async Server Component */}
         <IntroductionHeader />
 
-        {/* @ts-expect-error Async Server Component */}
         <StudentDetails />
       </section>
       <section className="h-full md:pl-6">
         <div className="space-y-2">
           <h2 className="text-lg font-bold">Aulas de Hoje</h2>
 
-          {/* @ts-expect-error Async Server Component */}
           <StudentTodaySchedule />
         </div>
       </section>

@@ -13,7 +13,6 @@ export default async function Horary() {
       </header>
 
       <section className="mt-6">
-        {/* @ts-expect-error Async Server Component */}
         <StudentScheduleTable />
       </section>
     </div>

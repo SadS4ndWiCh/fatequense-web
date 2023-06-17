@@ -23,7 +23,6 @@ export default async function StudentLayout({ children }: Props) {
   return (
     <Providers session={session}>
       <div className="flex min-h-screen flex-col md:flex-row md:gap-2">
-        {/* @ts-expect-error Async Server Component */}
         <Sidebar />
 
         <main className="flex-1 p-4 md:ml-[100px] md:p-6">{children}</main>

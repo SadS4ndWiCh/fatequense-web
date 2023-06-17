@@ -13,7 +13,6 @@ export default async function History() {
       </header>
 
       <section className="mt-8">
-        {/* @ts-expect-error Async Server Component */}
         <StudentHistoryTable />
       </section>
     </div>
