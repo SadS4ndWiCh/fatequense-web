@@ -2,7 +2,8 @@ import { ClassValue, clsx } from "clsx";
 import dayjs from "dayjs";
 import { twMerge } from "tailwind-merge";
 
-import { Lesson, Schedules, schedulesSchema } from "./validators/schedule";
+import { StudentSchedule, StudentScheduleLesson } from '~/types';
+import { studentScheduleSchema } from "./validations/schedule";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -16,12 +17,12 @@ export function dateFormat(date: string) {
   return dayjs(date).format("DD/MM/YYYY");
 }
 
-type ScheduleHorary = Lesson & {
+type ScheduleHorary = StudentScheduleLesson & {
   weekday: number;
 };
 
-export function tabulateSchedule(schedules: Schedules) {
-  const schedulesParsed = schedulesSchema.parse(schedules);
+export function tabulateSchedule(schedules: StudentSchedule) {
+  const schedulesParsed = studentScheduleSchema.parse(schedules);
 
   const horariesMap = new Map<string, ScheduleHorary[]>();
 
