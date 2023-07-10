@@ -1,10 +1,10 @@
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { z } from "zod";
 import { env } from "~/env.mjs";
 
 import { api } from "./api";
-import { studentAuthSchema } from "./validators/student-auth";
+import { studentProfileSchema } from "./validations/profile";
+import { studentAuthSchema, studentLoginResponseSchema } from "./validations/student-auth";
 
 export const authOptions: NextAuthOptions = {
   pages: {
@@ -25,14 +25,9 @@ export const authOptions: NextAuthOptions = {
         const { username, password } = studentAuthSchema.parse(credentials);
 
         try {
-          const {
-            res,
-            data: { token },
-          } = await api.post(z.object({ token: z.string() }), "/auth/login", {
-            data: { username, password },
+          const { token } = await api.post(studentLoginResponseSchema, "/auth/login", {
+            body: JSON.stringify({ username, password }),
           });
-
-          if (!res.ok) return null;
 
           return { id: "", accessToken: token };
         } catch (e) {
@@ -54,14 +49,11 @@ export const authOptions: NextAuthOptions = {
 
       if (!user) return token;
 
-      const profileRes = await fetch("http://localhost:3333/student/profile", {
-        method: "GET",
+      const profile = await api.get(studentProfileSchema, "/student/profile", {
         headers: {
           Authorization: `Bearer ${user.accessToken}`,
         },
       });
-
-      const { profile } = await profileRes.json();
 
       return {
         accessToken: user.accessToken,
