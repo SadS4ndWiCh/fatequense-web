@@ -12,7 +12,7 @@ export async function IntroductionHeader() {
       </small>
       <h1 className="text-3xl font-bold">{name}!</h1>
       <p className="mt-2">
-        Todas suas inforamções do siga mais relevantes serão atualizadas aqui
+        Todas suas informações do siga mais relevantes serão atualizadas aqui
       </p>
     </header>
   );
