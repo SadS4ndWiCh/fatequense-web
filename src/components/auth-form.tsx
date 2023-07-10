@@ -10,7 +10,7 @@ import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { studentAuthSchema } from "~/lib/validators/student-auth";
+import { studentAuthSchema } from "~/lib/validations/student-auth";
 
 import {
   Form,

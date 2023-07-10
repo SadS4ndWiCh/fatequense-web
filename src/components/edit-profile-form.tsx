@@ -12,7 +12,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { editStudentProfile } from "~/lib/student";
-import { profileEditSchema } from "~/lib/validators/profile-edit";
+import { editProfileSchema } from "~/lib/validations/profile";
 
 import {
   Form,
@@ -28,7 +28,7 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { toast } from "./ui/use-toast";
 
-type FormData = z.infer<typeof profileEditSchema>;
+type FormData = z.infer<typeof editProfileSchema>;
 
 type Props = {
   user: Session["user"];
@@ -41,7 +41,7 @@ export function EditProfileForm({ user }: Props) {
   const [loading, setLoading] = useState(false);
 
   const form = useForm<FormData>({
-    resolver: zodResolver(profileEditSchema),
+    resolver: zodResolver(editProfileSchema),
     defaultValues: {
       photoUrl: user.picture,
     },
@@ -50,7 +50,7 @@ export function EditProfileForm({ user }: Props) {
   async function onSubmit(data: FormData) {
     setLoading(true);
 
-    const success = await editStudentProfile({ user, data });
+    const success = await editStudentProfile({ data });
 
     setLoading(false);
 
