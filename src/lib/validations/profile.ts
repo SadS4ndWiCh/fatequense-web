@@ -22,3 +22,7 @@ export const studentProfileSchema = z.object({
     state: z.string(),
   }),
 });
+
+export const editProfileSchema = z.object({
+  photoUrl: z.string().url().optional()
+})
