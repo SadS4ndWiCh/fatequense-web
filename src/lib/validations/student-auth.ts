@@ -8,3 +8,7 @@ export const studentAuthSchema = z.object({
     .string({ required_error: "A senha é obrigatória" })
     .min(1, { message: "A senha deve ser preenchida." }),
 });
+
+export const studentLoginResponseSchema = z.object({
+  token: z.string().min(1)
+});
