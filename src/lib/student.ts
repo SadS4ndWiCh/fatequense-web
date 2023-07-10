@@ -1,104 +1,112 @@
 import { cache } from "react";
 
 import { Session } from "next-auth";
-import { z } from "zod";
 
+import { StudentEditProfile } from "~/types";
 import { api } from "./api";
-import { historySchema } from "./validators/history";
-import { partialAbsencesSchema } from "./validators/partial-absences";
-import { partialGradesSchema } from "./validators/partial-grades";
-import { profileSchema } from "./validators/profile";
-import { ProfileEdit, profileEditSchema } from "./validators/profile-edit";
-import { schedulesSchema } from "./validators/schedule";
+import {
+  studentDisciplineSchema,
+} from "./validations/discipline";
+import { studentHistorySchema } from "./validations/history";
+import { disciplineLessonsSchema, studentPartialAbsencesSchema } from "./validations/partial-absences";
+import { studentPartialGradeSchema } from "./validations/partial-grade";
+import { editProfileSchema, studentProfileSchema } from "./validations/profile";
+import { studentScheduleSchema } from "./validations/schedule";
 
 type Props = {
   user: Session["user"];
 };
 
-const profileResponseSchema = z.object({ profile: profileSchema });
 export const getStudentProfile = cache(async ({ user }: Props) => {
-  const {
-    data: { profile },
-  } = await api.get(profileResponseSchema, "/student/profile", {
+  return await api.get(studentProfileSchema, "/student/profile", {
     headers: {
       Authorization: `Bearer ${user.accessToken}`,
     },
   });
-
-  return profile;
 });
 
-const historyResponseSchema = z.object({ history: historySchema });
 export const getStudentHistory = cache(async ({ user }: Props) => {
-  const {
-    data: { history },
-  } = await api.get(historyResponseSchema, "/student/history", {
+  return await api.get(studentHistorySchema, "/student/history", {
     headers: {
       Authorization: `Bearer ${user.accessToken}`,
     },
   });
-
-  return history;
 });
 
-const scheduleResponseSchema = z.object({ schedule: schedulesSchema });
 export const getStudentSchedules = cache(async ({ user }: Props) => {
-  const {
-    data: { schedule },
-  } = await api.get(scheduleResponseSchema, "/student/schedule", {
+  return await api.get(studentScheduleSchema, "/student/schedule", {
     headers: {
       Authorization: `Bearer ${user.accessToken}`,
     },
   });
-
-  return schedule;
 });
 
-const partialGradeResponseSchema = z.object({
-  partialGrade: partialGradesSchema,
-});
 export const getStudentPartialGrades = cache(async ({ user }: Props) => {
-  const {
-    data: { partialGrade },
-  } = await api.get(partialGradeResponseSchema, "/student/partialGrade", {
+  return await api.get(studentPartialGradeSchema, "/student/partial-grade", {
     headers: {
       Authorization: `Bearer ${user.accessToken}`,
     },
   });
-
-  return partialGrade;
 });
 
-const partialAbsencesResponseSchema = z.object({
-  partialAbsences: partialAbsencesSchema,
-});
 export const getStudentPartialAbsences = cache(async ({ user }: Props) => {
-  const {
-    data: { partialAbsences },
-  } = await api.get(partialAbsencesResponseSchema, "/student/partialAbsences", {
+  return await api.get(studentPartialAbsencesSchema, "/student/partial-absences", {
     headers: {
       Authorization: `Bearer ${user.accessToken}`,
     },
   });
-
-  return partialAbsences;
 });
 
-type EditStudentProfileProps = Props & {
-  data: ProfileEdit;
+type EditStudentProfileProps = {
+  data: StudentEditProfile;
 };
 
 export const editStudentProfile = cache(
-  async ({ user, data }: EditStudentProfileProps) => {
-    const parsedData = profileEditSchema.parse(data);
+  async ({ data }: EditStudentProfileProps) => {
+    const parsedData = editProfileSchema.parse(data);
 
-    const { res } = await api.patch(z.any(), "/student/profile/edit", {
+    const res = await fetch('/api/student/edit', {
+      method: 'PATCH',
       headers: {
-        Authorization: `Bearer ${user.accessToken}`,
+        'Content-Type': 'application/json',
       },
-      data: parsedData,
+      body: JSON.stringify(parsedData)
     });
 
     return res.ok;
   },
 );
+
+type GetDisciplineProps = Props & {
+  disciplineCode: string;
+};
+
+export const getDiscipline = async ({
+  user,
+  disciplineCode,
+}: GetDisciplineProps) => {
+  return await api.get(
+    studentDisciplineSchema,
+    `/student/disciplines/${disciplineCode}`,
+    {
+      headers: {
+        Authorization: `Bearer ${user.accessToken}`,
+      },
+    },
+  );
+};
+
+export const getDisciplineLessons = async ({
+  user,
+  disciplineCode,
+}: GetDisciplineProps) => {
+  return await api.get(
+    disciplineLessonsSchema,
+    `/student/disciplines/${disciplineCode}/lessons`,
+    {
+      headers: {
+        Authorization: `Bearer ${user.accessToken}`,
+      },
+    },
+  );
+};
