@@ -12,6 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
+import { AlertCircle } from "lucide-react";
 
 function Grade({ grade }: { grade: number }) {
   return (
@@ -32,6 +33,30 @@ export async function StudentPartialGrades() {
   if (!user) notFound();
 
   const partialGrades = (await getStudentPartialGrades({ user })) ?? [];
+
+  if (partialGrades.length === 0) {
+    return (
+      <div className="max-w-lg mx-auto">
+        <div className="my-4 text-center">
+          <h2 className="font-semibold text-xl">Notas não encontradas</h2>
+          <p>Aparentemente você está em férias ou ainda não se matriculou nas matérias!</p>
+        </div>
+
+        <div className="space-y-2 rounded-md bg-yellow-50 p-4 border-2 border-transparent dark:border-yellow-500 text-yellow-600 dark:bg-transparent dark:text-yellow-500">
+          <div className="flex items-center gap-2">
+            <AlertCircle className="h-5 w-5" />
+            <span className="text-sm">Atenção</span>
+          </div>
+
+          <p>
+            Caso não tenha seja nenhuma das opções acima, lembre-se que esse site pode apresentar
+            problemas a qualquer momento, mas estaremos tentando resolver o mais rápido possível
+          </p>
+        </div>
+      </div>
+    )
+  }
+
   const sortedExamsGrades = partialGrades.map((grade) => {
     const sorted = grade.examsDates.sort((a, b) =>
       a.title > b.title ? 1 : -1,
