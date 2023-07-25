@@ -1,14 +1,14 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react'
 
-import { Inter } from "next/font/google";
+import { Inter } from 'next/font/google'
 
-import { siteConfig } from "~/config/site";
+import { siteConfig } from '~/config/site'
 
-import { ThemeProvider } from "~/components/theme-provider";
+import { ThemeProvider } from '~/components/theme-provider'
 
-import "./globals.css";
+import './globals.css'
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: {
@@ -16,16 +16,16 @@ export const metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
-};
+}
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
         </ThemeProvider>
       </body>
     </html>
-  );
+  )
 }
