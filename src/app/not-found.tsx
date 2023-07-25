@@ -1,10 +1,10 @@
-import Link from "next/link";
+import Link from 'next/link'
 
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft } from 'lucide-react'
 
-import { cn } from "~/lib/utils";
+import { cn } from '~/lib/utils'
 
-import { buttonVariants } from "~/components/ui/button";
+import { buttonVariants } from '~/components/ui/button'
 
 export default function NotFound() {
   return (
@@ -18,12 +18,12 @@ export default function NotFound() {
 
         <Link
           href="/login"
-          className={cn(buttonVariants({ variant: "ghost" }))}
+          className={cn(buttonVariants({ variant: 'ghost' }))}
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
           <span>Voltar</span>
         </Link>
       </div>
     </div>
-  );
+  )
 }
