@@ -1,12 +1,5 @@
 {
   "extends": [
-    "@rocketseat/eslint-config/react",
-    "next"
-  ],
-  "rules": {
-    "prettier/prettier": [
-      "error",
-      {}
-    ]
-  }
+    "@rocketseat/eslint-config/react"
+  ]
 }
