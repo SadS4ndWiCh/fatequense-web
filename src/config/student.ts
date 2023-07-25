@@ -1,31 +1,31 @@
-import { CalendarDays, Home, Inbox, Puzzle, Star } from "lucide-react";
+import { CalendarDays, Home, Inbox, Puzzle, Star } from 'lucide-react'
 
 export const studentConfig = {
   sidebar: [
     {
-      href: "/aluno",
-      label: "Home",
+      href: '/aluno',
+      label: 'Home',
       icon: Home,
     },
     {
-      href: "/aluno/horario",
-      label: "Horários",
+      href: '/aluno/horario',
+      label: 'Horários',
       icon: CalendarDays,
     },
     {
-      href: "/aluno/notas-parciais",
-      label: "Notas Parciais",
+      href: '/aluno/notas-parciais',
+      label: 'Notas Parciais',
       icon: Star,
     },
     {
-      href: "/aluno/faltas-parciais",
-      label: "Faltas Parciais",
+      href: '/aluno/faltas-parciais',
+      label: 'Faltas Parciais',
       icon: Puzzle,
     },
     {
-      href: "/aluno/historico",
-      label: "Histórico",
+      href: '/aluno/historico',
+      label: 'Histórico',
       icon: Inbox,
     },
   ],
-} as const;
+} as const

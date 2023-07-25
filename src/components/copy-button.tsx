@@ -1,38 +1,38 @@
-"use client";
+'use client'
 
-import { ComponentProps, useState } from "react";
+import { ComponentProps, useState } from 'react'
 
-import { Check, Copy } from "lucide-react";
+import { Check, Copy } from 'lucide-react'
 
-import useCopyToClipboard from "~/hooks/use-copy-to-clipboard";
+import useCopyToClipboard from '~/hooks/use-copy-to-clipboard'
 
-import { cn } from "~/lib/utils";
+import { cn } from '~/lib/utils'
 
-import { Button } from "./ui/button";
-import { useToast } from "./ui/use-toast";
+import { Button } from './ui/button'
+import { useToast } from './ui/use-toast'
 
 type Props = ComponentProps<typeof Button> & {
-  content: string;
-};
+  content: string
+}
 
 export function CopyButton({ content, className, children, ...rest }: Props) {
-  const { toast } = useToast();
-  const [hasCopyed, setHasCopyed] = useState(false);
-  // eslint-disable-next-line no-unused-vars
-  const [_, copy] = useCopyToClipboard();
+  const { toast } = useToast()
+  const [hasCopyed, setHasCopyed] = useState(false)
+  // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
+  const [_, copy] = useCopyToClipboard()
 
-  const hide = () => setHasCopyed(false);
+  const hide = () => setHasCopyed(false)
 
   function handleCopyedToClipboard() {
-    setHasCopyed(true);
-    copy(content);
+    setHasCopyed(true)
+    copy(content)
 
-    setTimeout(hide, 1500);
+    setTimeout(hide, 1500)
 
     toast({
       description: `"${content}" foi copiado para área de transferência.`,
       duration: 1500,
-    });
+    })
   }
 
   return (
@@ -40,7 +40,7 @@ export function CopyButton({ content, className, children, ...rest }: Props) {
       variant="outline"
       size="sm"
       onClick={handleCopyedToClipboard}
-      className={cn("flex items-center justify-between", className)}
+      className={cn('flex items-center justify-between', className)}
       {...rest}
     >
       {children}
@@ -53,5 +53,5 @@ export function CopyButton({ content, className, children, ...rest }: Props) {
         </>
       )}
     </Button>
-  );
+  )
 }
