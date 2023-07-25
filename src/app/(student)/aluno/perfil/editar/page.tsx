@@ -1,20 +1,20 @@
-import { notFound } from "next/navigation";
+import { notFound } from 'next/navigation'
 
-import { AlertCircle } from "lucide-react";
+import { AlertCircle } from 'lucide-react'
 
-import { getCurrentUser } from "~/lib/session";
+import { getCurrentUser } from '~/lib/session'
 
-import { EditProfileForm } from "~/components/edit-profile-form";
-import { StudentProfileCard } from "~/components/student-profile-card";
+import { EditProfileForm } from '~/components/forms/edit-profile-form'
+import { StudentProfileCard } from '~/components/student/student-profile-card'
 
 export const metadata = {
-  title: "Editar Perfil",
-};
+  title: 'Editar Perfil',
+}
 
 export default async function EditProfile() {
-  const user = await getCurrentUser();
+  const user = await getCurrentUser()
 
-  if (!user) return notFound();
+  if (!user) return notFound()
 
   return (
     <div>
@@ -43,5 +43,5 @@ export default async function EditProfile() {
         </section>
       </div>
     </div>
-  );
+  )
 }

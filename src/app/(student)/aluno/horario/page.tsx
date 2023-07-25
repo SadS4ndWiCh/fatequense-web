@@ -1,8 +1,8 @@
-import { StudentScheduleTable } from "~/components/student-schedule-table";
+import { StudentScheduleCalendar } from '~/components/student/student-schedule-calendar'
 
 export const metadata = {
-  title: "Horários",
-};
+  title: 'Horários',
+}
 
 export default async function Horary() {
   return (
@@ -13,8 +13,8 @@ export default async function Horary() {
       </header>
 
       <section className="mt-6">
-        <StudentScheduleTable />
+        <StudentScheduleCalendar />
       </section>
     </div>
-  );
+  )
 }

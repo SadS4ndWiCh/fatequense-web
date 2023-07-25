@@ -1,24 +1,24 @@
-import Link from "next/link";
-import { notFound } from "next/navigation";
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
 
-import { Settings2 } from "lucide-react";
+import { Settings2 } from 'lucide-react'
 
-import { getCurrentUser } from "~/lib/session";
-import { cn } from "~/lib/utils";
+import { getCurrentUser } from '~/lib/session'
+import { cn } from '~/lib/utils'
 
-import { buttonVariants } from "~/components/ui/button";
+import { buttonVariants } from '~/components/ui/button'
 
-import { StudentDetails } from "~/components/student-details";
-import { StudentProfileCard } from "~/components/student-profile-card";
+import { StudentProfileCard } from '~/components/student/student-profile-card'
+import { StudentSummary } from '~/components/student/student-summary'
 
 export const metadata = {
-  title: "Perfil",
-};
+  title: 'Perfil',
+}
 
 export default async function Profile() {
-  const user = await getCurrentUser();
+  const user = await getCurrentUser()
 
-  if (!user) return notFound();
+  if (!user) return notFound()
 
   return (
     <div>
@@ -34,8 +34,8 @@ export default async function Profile() {
           <Link
             href="/aluno/perfil/editar"
             className={cn(
-              "mt-4 inline-block w-full",
-              buttonVariants({ size: "sm" }),
+              'mt-4 inline-block w-full',
+              buttonVariants({ size: 'sm' }),
             )}
           >
             <Settings2 className="mr-2 h-4 w-4" />
@@ -44,9 +44,9 @@ export default async function Profile() {
         </section>
 
         <section>
-          <StudentDetails />
+          <StudentSummary />
         </section>
       </div>
     </div>
-  );
+  )
 }

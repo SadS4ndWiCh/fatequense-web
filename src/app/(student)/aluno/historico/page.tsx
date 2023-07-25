@@ -1,8 +1,8 @@
-import { StudentHistoryTable } from "~/components/student-history-table";
+import { StudentHistory } from '~/components/student/student-history'
 
 export const metadata = {
-  title: "Histórico",
-};
+  title: 'Histórico',
+}
 
 export default async function History() {
   return (
@@ -13,8 +13,8 @@ export default async function History() {
       </header>
 
       <section className="mt-8">
-        <StudentHistoryTable />
+        <StudentHistory />
       </section>
     </div>
-  );
+  )
 }

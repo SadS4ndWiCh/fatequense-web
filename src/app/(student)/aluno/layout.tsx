@@ -1,23 +1,23 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react'
 
-import { notFound } from "next/navigation";
+import { notFound } from 'next/navigation'
 
-import { getSession } from "~/lib/session";
+import { getSession } from '~/lib/session'
 
-import { Toaster } from "~/components/ui/toaster";
+import { Toaster } from '~/components/ui/toaster'
 
-import { Providers } from "~/components/providers";
-import { Sidebar } from "~/components/sidebar";
+import { Sidebar } from '~/components/layouts/sidebar'
+import { Providers } from '~/components/providers'
 
 type Props = {
-  children: ReactNode;
-};
+  children: ReactNode
+}
 
 export default async function StudentLayout({ children }: Props) {
-  const session = await getSession();
+  const session = await getSession()
 
   if (!session) {
-    return notFound();
+    return notFound()
   }
 
   return (
@@ -29,5 +29,5 @@ export default async function StudentLayout({ children }: Props) {
         <Toaster />
       </div>
     </Providers>
-  );
+  )
 }
