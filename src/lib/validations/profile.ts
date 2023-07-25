@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod'
 
 export const studentProfileSchema = z.object({
   name: z
@@ -21,8 +21,8 @@ export const studentProfileSchema = z.object({
     coursePeriod: z.string(),
     state: z.string(),
   }),
-});
+})
 
 export const editProfileSchema = z.object({
-  photoUrl: z.string().url().optional()
+  photoUrl: z.string().url().optional(),
 })

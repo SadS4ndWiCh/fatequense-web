@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod'
 
 export const disciplineLessonsSchema = z.array(
   z.object({
@@ -17,6 +17,6 @@ export const studentPartialAbsencesSchema = z.array(
     totalAbsences: z.number(),
     lessons: disciplineLessonsSchema,
   }),
-);
+)
 
-export type PartialAbsences = z.infer<typeof studentPartialAbsencesSchema>;
+export type PartialAbsences = z.infer<typeof studentPartialAbsencesSchema>

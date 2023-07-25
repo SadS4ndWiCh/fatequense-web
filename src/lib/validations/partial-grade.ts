@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod'
 
 export const studentPartialGradeSchema = z.array(
   z.object({
@@ -13,6 +13,6 @@ export const studentPartialGradeSchema = z.array(
       }),
     ),
   }),
-);
+)
 
-export type PartialGrade = z.infer<typeof studentPartialGradeSchema>;
+export type PartialGrade = z.infer<typeof studentPartialGradeSchema>

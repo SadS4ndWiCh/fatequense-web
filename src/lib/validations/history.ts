@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod'
 
 export const studentDisciplineHistorySchema = z.object({
   cod: z.string().length(6),
@@ -9,6 +9,6 @@ export const studentDisciplineHistorySchema = z.object({
   presenceFrequency: z.number(),
   renunciationAt: z.string().nullable(),
   isApproved: z.boolean(),
-});
+})
 
-export const studentHistorySchema = z.array(studentDisciplineHistorySchema);
+export const studentHistorySchema = z.array(studentDisciplineHistorySchema)

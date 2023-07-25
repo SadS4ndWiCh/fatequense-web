@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod'
 
 export const schoolGradeDisciplineSchema = z
   .object({
@@ -15,14 +15,14 @@ export const schoolGradeDisciplineSchema = z
       discipline.status === 'not-attended' &&
       (!!discipline.period || !!discipline.frequency || !!discipline.grade)
     )
-      return false;
+      return false
 
-    return true;
-  });
+    return true
+  })
 
 export const schoolGradeSchema = z.array(
   z.object({
     semester: z.number(),
     disciplines: z.array(schoolGradeDisciplineSchema),
   }),
-);
+)

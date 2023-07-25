@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod'
 
 export const studentDisciplineSchema = z.object({
   name: z.string().min(1),
@@ -20,8 +20,8 @@ export const studentDisciplineSchema = z.object({
     total: z.coerce.number(),
   }),
   totalAbsencesAllowed: z.coerce.number(),
-});
+})
 
 export const disciplineParamsSchema = z.object({
   code: z.string().min(1, { message: 'Missing discipline code' }),
-});
+})
