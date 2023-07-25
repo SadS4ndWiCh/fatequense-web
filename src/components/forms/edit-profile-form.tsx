@@ -1,18 +1,17 @@
-"use client";
+'use client'
 
-import { useState } from "react";
+import { useState } from 'react'
 
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation'
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { LoaderIcon } from "lucide-react";
-import { Session } from "next-auth";
-import { useSession } from "next-auth/react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod'
+import { LoaderIcon } from 'lucide-react'
+import { Session } from 'next-auth'
+import { useSession } from 'next-auth/react'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 
-import { editStudentProfile } from "~/lib/student";
-import { editProfileSchema } from "~/lib/validations/profile";
+import { editProfileSchema } from '~/lib/validations/profile'
 
 import {
   Form,
@@ -22,54 +21,60 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "~/components/ui/form";
+} from '~/components/ui/form'
 
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { toast } from "./ui/use-toast";
+import { Button } from '../ui/button'
+import { Input } from '../ui/input'
+import { toast } from '../ui/use-toast'
 
-type FormData = z.infer<typeof editProfileSchema>;
+type FormData = z.infer<typeof editProfileSchema>
 
 type Props = {
-  user: Session["user"];
-};
+  user: Session['user']
+}
 
 export function EditProfileForm({ user }: Props) {
-  const router = useRouter();
-  const { update: updateSession } = useSession();
+  const router = useRouter()
+  const { update: updateSession } = useSession()
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   const form = useForm<FormData>({
     resolver: zodResolver(editProfileSchema),
     defaultValues: {
       photoUrl: user.picture,
     },
-  });
+  })
 
   async function onSubmit(data: FormData) {
-    setLoading(true);
+    setLoading(true)
 
-    const success = await editStudentProfile({ data });
+    const res = await fetch('/api/student/edit', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
 
-    setLoading(false);
+    setLoading(false)
 
-    if (!success) {
+    if (!res.ok) {
       return toast({
-        title: "Ocorreu algum problema.",
+        title: 'Ocorreu algum problema.',
         description:
-          "Não foi possível editar o perfil por decorrência de algum problema.",
-        variant: "destructive",
-      });
+          'Não foi possível editar o perfil por decorrência de algum problema.',
+        variant: 'destructive',
+      })
     }
 
-    await updateSession({ picture: data.photoUrl });
+    await updateSession({ picture: data.photoUrl })
 
     toast({
-      description: "Perfil atualizado com sucesso!",
-    });
+      description: 'Perfil atualizado com sucesso!',
+    })
 
-    router.refresh();
+    router.refresh()
   }
 
   return (
@@ -102,5 +107,5 @@ export function EditProfileForm({ user }: Props) {
         </Button>
       </form>
     </Form>
-  );
+  )
 }

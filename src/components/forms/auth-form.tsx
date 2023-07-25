@@ -1,16 +1,16 @@
-"use client";
+'use client'
 
-import { useState } from "react";
+import { useState } from 'react'
 
-import { useSearchParams } from "next/navigation";
+import { useSearchParams } from 'next/navigation'
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { LoaderIcon } from "lucide-react";
-import { signIn } from "next-auth/react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod'
+import { LoaderIcon } from 'lucide-react'
+import { signIn } from 'next-auth/react'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 
-import { studentAuthSchema } from "~/lib/validations/student-auth";
+import { studentAuthSchema } from '~/lib/validations/student-auth'
 
 import {
   Form,
@@ -20,30 +20,28 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "~/components/ui/form";
+} from '~/components/ui/form'
 
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
+import { Button } from '../ui/button'
+import { Input } from '../ui/input'
 
-type FormData = z.infer<typeof studentAuthSchema>;
+type FormData = z.infer<typeof studentAuthSchema>
 
 export function AuthForm() {
-  const [loading, setLoading] = useState(false);
-  const searchParams = useSearchParams();
+  const [loading, setLoading] = useState(false)
+  const searchParams = useSearchParams()
 
   const form = useForm<FormData>({
     resolver: zodResolver(studentAuthSchema),
-  });
+  })
 
   async function onSubmit(data: FormData) {
-    setLoading(true);
+    setLoading(true)
 
-    await signIn("credentials", {
+    await signIn('credentials', {
       ...data,
-      callbackUrl: searchParams?.get("from") || "/aluno",
-    });
-
-    setLoading(false);
+      callbackUrl: searchParams?.get('from') || '/aluno',
+    })
   }
 
   return (
@@ -99,5 +97,5 @@ export function AuthForm() {
         </Button>
       </form>
     </Form>
-  );
+  )
 }
