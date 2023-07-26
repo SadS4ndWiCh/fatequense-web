@@ -17,9 +17,9 @@ export function MainNav() {
           key={link.href}
           href={link.href}
           className={cn(
-            'w-full flex items-center gap-2 rounded-md p-4 hover:bg-zinc-50 hover:text-gray-600 dark:hover:bg-gray-800 dark:hover:text-zinc-50',
+            'w-full flex items-center gap-2 rounded-md p-4 hover:bg-zinc-50 hover:text-slate-600 dark:hover:bg-slate-800 dark:hover:text-zinc-50',
             {
-              'bg-zinc-50 text-gray-600 dark:bg-gray-800 dark:text-zinc-50':
+              'bg-zinc-50 text-slate-600 dark:bg-slate-800 dark:text-zinc-50':
                 pathname === link.href,
             },
           )}
