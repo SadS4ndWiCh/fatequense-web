@@ -8,6 +8,8 @@ import { cn } from '~/lib/utils'
 
 import { buttonVariants } from '~/components/ui/button'
 
+import { MobileStudentEditProfile } from '~/components/student/mobile-student-edit-profile'
+import { StudentEditProfileSheet } from '~/components/student/student-edit-profile-sheet'
 import { StudentProfileCard } from '~/components/student/student-profile-card'
 import { StudentSummary } from '~/components/student/student-summary'
 
@@ -28,19 +30,15 @@ export default async function Profile() {
       </header>
 
       <div className="mt-8 flex flex-col gap-8 md:flex-row md:justify-between md:gap-4">
-        <section>
+        <section className="space-y-4">
           <StudentProfileCard user={user} />
 
-          <Link
-            href="/aluno/perfil/editar"
-            className={cn(
-              'mt-4 inline-block w-full',
-              buttonVariants({ size: 'sm' }),
-            )}
-          >
-            <Settings2 className="mr-2 h-4 w-4" />
-            <span>Editar Perfil</span>
-          </Link>
+          <div className="hidden lg:block">
+            <StudentEditProfileSheet />
+          </div>
+          <div className="lg:hidden">
+            <MobileStudentEditProfile />
+          </div>
         </section>
 
         <section>
