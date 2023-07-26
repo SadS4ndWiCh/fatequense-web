@@ -16,7 +16,7 @@ export async function Sidebar() {
   if (!user) notFound()
 
   return (
-    <aside className="sticky top-0 dark:bg-gray-900 md:fixed md:bottom-0 md:left-0 md:top-0 z-10 flex min-w-[100px] items-center bg-white p-4 transition-all md:flex-col md:shadow-md">
+    <aside className="sticky top-0 dark:bg-slate-900 md:fixed md:bottom-0 md:left-0 md:top-0 z-10 flex min-w-[100px] items-center bg-white p-4 transition-all md:flex-col md:shadow-md">
       <nav className="flex-1 flex gap-2 items-center md:block md:space-y-6 md:divide-y">
         <MobileNav />
 
