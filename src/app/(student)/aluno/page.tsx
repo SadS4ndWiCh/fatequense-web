@@ -33,7 +33,7 @@ export default async function Student() {
 
         <StudentSummary />
       </section>
-      <ScrollArea className="hidden lg:block lg:max-h-screen">
+      <ScrollArea className="hidden lg:block lg:max-h-[calc(100vh-3rem)]">
         <section className="h-full space-y-2 md:pl-6">
           <h2 className="text-lg font-bold">Aulas de Hoje</h2>
 
