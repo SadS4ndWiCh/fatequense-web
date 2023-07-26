@@ -21,7 +21,7 @@ export async function MobileStudentTodaySchedule() {
             <BookOpen className="w-5 h-5" />
           </Button>
         </SheetTrigger>
-        <SheetContent side="right">
+        <SheetContent side="right" className="flex flex-col">
           <SheetHeader>
             <SheetTitle>Aulas de hoje</SheetTitle>
             <SheetDescription>
@@ -29,7 +29,7 @@ export async function MobileStudentTodaySchedule() {
             </SheetDescription>
           </SheetHeader>
 
-          <ScrollArea className="h-full my-8">
+          <ScrollArea className="flex-1 my-8">
             <StudentTodaySchedule />
           </ScrollArea>
         </SheetContent>
