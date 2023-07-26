@@ -17,6 +17,7 @@ export async function PATCH(req: Request) {
     await fetch(
       new URL('/student/profile/edit', env.NEXT_PUBLIC_API_BASE_URL),
       {
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
           Authorization: session.user.accessToken,
