@@ -1,12 +1,6 @@
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
-import { Settings2 } from 'lucide-react'
-
 import { getCurrentUser } from '~/lib/session'
-import { cn } from '~/lib/utils'
-
-import { buttonVariants } from '~/components/ui/button'
 
 import { MobileStudentEditProfile } from '~/components/student/mobile-student-edit-profile'
 import { StudentEditProfileSheet } from '~/components/student/student-edit-profile-sheet'
