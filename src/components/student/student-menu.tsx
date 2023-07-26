@@ -2,19 +2,7 @@
 
 import Link from 'next/link'
 
-import {
-  CalendarDays,
-  Home,
-  Inbox,
-  Laptop,
-  LogOut,
-  Moon,
-  Palette,
-  Puzzle,
-  Star,
-  Sun,
-  User,
-} from 'lucide-react'
+import { Laptop, LogOut, Moon, Palette, Sun, User } from 'lucide-react'
 import type { Session } from 'next-auth'
 import { signOut } from 'next-auth/react'
 import { useTheme } from 'next-themes'
@@ -82,36 +70,6 @@ export function StudentMenu({ user }: Props) {
               </Link>
             </DropdownMenuItem>
           ))}
-          {/* <DropdownMenuItem asChild className="cursor-pointer">
-            <Link href="/aluno">
-              <Home className="mr-2 h-4 w-4" />
-              <span>Home</span>
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem asChild className="cursor-pointer">
-            <Link href="/aluno/horario">
-              <CalendarDays className="mr-2 h-4 w-4" />
-              <span>Horários</span>
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem asChild className="cursor-pointer">
-            <Link href="/aluno/notas-parciais">
-              <Star className="mr-2 h-4 w-4" />
-              <span>Notas Parciais</span>
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem asChild className="cursor-pointer">
-            <Link href="/aluno/faltas-parciais">
-              <Puzzle className="mr-2 h-4 w-4" />
-              <span>Faltas Pariciais</span>
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem asChild className="cursor-pointer">
-            <Link href="/aluno/historico">
-              <Inbox className="mr-2 h-4 w-4" />
-              <span>Histórico</span>
-            </Link>
-          </DropdownMenuItem> */}
         </DropdownMenuGroup>
 
         <DropdownMenuSeparator />
@@ -141,7 +99,7 @@ export function StudentMenu({ user }: Props) {
 
         <DropdownMenuItem
           className="flex cursor-pointer items-center"
-          onSelect={(event: any) => {
+          onSelect={(event: Event) => {
             event.preventDefault()
             signOut({ callbackUrl: `${window.location.origin}/login` })
           }}
