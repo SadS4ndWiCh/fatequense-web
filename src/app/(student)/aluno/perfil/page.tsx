@@ -28,10 +28,10 @@ export default async function Profile() {
           <StudentProfileCard user={user} />
 
           <div className="hidden lg:block">
-            <StudentEditProfileSheet />
+            <StudentEditProfileSheet user={user} />
           </div>
           <div className="lg:hidden">
-            <MobileStudentEditProfile />
+            <MobileStudentEditProfile user={user} />
           </div>
         </section>
 
