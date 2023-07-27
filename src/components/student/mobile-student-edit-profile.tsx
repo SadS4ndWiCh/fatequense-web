@@ -1,47 +1,44 @@
-import { notFound } from 'next/navigation'
-
 import { AlertCircle, Settings2 } from 'lucide-react'
-
-import { getCurrentUser } from '~/lib/session'
+import { Session } from 'next-auth'
 
 import { Button } from '~/components/ui/button'
 import {
-  Drawer,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from '~/components/ui/drawer'
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '~/components/ui/sheet'
 
 import { EditProfileForm } from '../forms/edit-profile-form'
 import { Alert, AlertDescription, AlertTitle } from '../ui/alert'
 
-export async function MobileStudentEditProfile() {
-  const user = await getCurrentUser()
+type Props = {
+  user: Session['user']
+}
 
-  if (!user) notFound()
-
+export async function MobileStudentEditProfile({ user }: Props) {
   return (
-    <Drawer>
-      <DrawerTrigger asChild>
+    <Sheet>
+      <SheetTrigger asChild>
         <Button className="w-full">
           <Settings2 className="mr-2 w-4 h-4" />
           <span>Editar Perfil</span>
         </Button>
-      </DrawerTrigger>
-      <DrawerContent className="space-y-4 min-h-[35vh]">
-        <DrawerHeader>
-          <DrawerTitle>Editar Perfil</DrawerTitle>
-          <DrawerDescription>
+      </SheetTrigger>
+      <SheetContent side="bottom" className="space-y-4">
+        <SheetHeader>
+          <SheetTitle>Editar Perfil</SheetTitle>
+          <SheetDescription>
             Atualize suas informações de perfil, como o avatar
-          </DrawerDescription>
-        </DrawerHeader>
+          </SheetDescription>
+        </SheetHeader>
 
         <EditProfileForm user={user} />
 
-        <DrawerFooter>
+        <SheetFooter>
           <Alert className="mt-4">
             <AlertCircle className="h-5 w-5" />
             <AlertTitle>Atenção</AlertTitle>
@@ -52,8 +49,8 @@ export async function MobileStudentEditProfile() {
               sensível.
             </AlertDescription>
           </Alert>
-        </DrawerFooter>
-      </DrawerContent>
-    </Drawer>
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
   )
 }
