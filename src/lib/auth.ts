@@ -1,85 +1,88 @@
-import type { NextAuthOptions } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
-import {
-  verify as jwtVerify,
-  type Algorithm,
-  type JwtPayload,
-} from "jsonwebtoken";
+import type { NextAuthOptions } from 'next-auth'
+import CredentialsProvider from 'next-auth/providers/credentials'
+import { env } from '~/env.mjs'
 
-import { studentAuthSchema } from "./validators/student-auth";
+import { api } from './api'
+import { studentProfileSchema } from './validations/profile'
+import {
+  studentAuthSchema,
+  studentLoginResponseSchema,
+} from './validations/student-auth'
 
 export const authOptions: NextAuthOptions = {
   pages: {
-    signIn: "/login",
+    signIn: '/login',
+  },
+  session: {
+    strategy: 'jwt',
+    maxAge: 60 * 60 * 2, // 2 horas
   },
   jwt: {
-    maxAge: 60 * 60 * 3, // 3 horas
+    maxAge: 60 * 60 * 2, // 2 horas
   },
   providers: [
     CredentialsProvider({
-      name: "credentials",
+      name: 'credentials',
       credentials: {},
       async authorize(credentials) {
-        const { username, password } = studentAuthSchema.parse(credentials);
+        const { username, password } = studentAuthSchema.parse(credentials)
 
-        const authResponse = await fetch("http://localhost:3333/auth/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ username, password }),
-        });
+        try {
+          const { token } = await api.post(
+            studentLoginResponseSchema,
+            '/auth/login',
+            {
+              body: JSON.stringify({ username, password }),
+            },
+          )
 
-        if (!authResponse.ok) return null;
+          return { id: '', accessToken: token }
+        } catch (e) {
+          console.error(e)
 
-        const { token } = await authResponse.json();
-
-        return { id: "", accessToken: token };
+          return null
+        }
       },
     }),
   ],
 
   callbacks: {
-    async jwt({ token, user }) {
-      if (!user) return token;
+    async jwt({ token, user, trigger, session: jwtSession }) {
+      if (trigger === 'update' && jwtSession?.picture) {
+        token.picture = jwtSession.picture
 
-      const profileRes = await fetch("http://localhost:3333/student/profile", {
-        method: "GET",
+        return token
+      }
+
+      if (!user) return token
+
+      const profile = await api.get(studentProfileSchema, '/student/profile', {
         headers: {
           Authorization: `Bearer ${user.accessToken}`,
         },
-      });
-
-      const { profile } = await profileRes.json();
-
-      const { session, ...payload } = jwtVerify(
-        user.accessToken,
-        process.env.JWT_SECRET_KEY!,
-        {
-          algorithms: [process.env.JWT_ALGORITHM as Algorithm],
-        }
-      ) as JwtPayload;
+      })
 
       return {
-        ...payload,
         accessToken: user.accessToken,
+        ra: profile.ra,
         name: profile.name,
         email: profile.institutionalEmail,
         picture: profile.photoUrl,
-      };
+      }
     },
 
     async session({ session, token }) {
-      if (!token) return session;
+      if (!token) return session
 
-      session.user.name = token.name!;
-      session.user.email = token.email!;
-      session.user.picture = token.picture!;
-      session.user.accessToken = token.accessToken;
+      session.user.ra = token.ra!
+      session.user.name = token.name!
+      session.user.email = token.email!
+      session.user.picture = token.picture!
+      session.user.accessToken = token.accessToken
 
-      return session;
+      return session
     },
   },
 
-  secret: process.env.NEXTAUTH_SECRET,
-};
+  secret: env.NEXTAUTH_SECRET,
+}

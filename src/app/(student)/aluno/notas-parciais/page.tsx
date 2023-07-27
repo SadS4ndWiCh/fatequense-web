@@ -1,8 +1,8 @@
-import { StudentPartialGrades } from "~/components/student-partial-grades";
+import { StudentPartialGrades } from '~/components/student/student-partial-grades'
 
 export const metadata = {
-  title: "Notas Parciais",
-};
+  title: 'Notas Parciais',
+}
 
 export default function PartialGrade() {
   return (
@@ -13,9 +13,8 @@ export default function PartialGrade() {
       </header>
 
       <section className="mt-8">
-        {/* @ts-expect-error Async Server Component */}
         <StudentPartialGrades />
       </section>
     </div>
-  );
+  )
 }

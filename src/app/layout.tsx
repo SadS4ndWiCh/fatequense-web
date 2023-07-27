@@ -1,9 +1,14 @@
-import "./globals.css";
-import { Inter } from "next/font/google";
+import { ReactNode } from 'react'
 
-import { siteConfig } from "~/config/site";
+import { Inter } from 'next/font/google'
 
-const inter = Inter({ subsets: ["latin"] });
+import { siteConfig } from '~/config/site'
+
+import { ThemeProvider } from '~/components/theme-provider'
+
+import './globals.css'
+
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: {
@@ -11,16 +16,16 @@ export const metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
-};
+}
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="pt-BR">
-      <body className={inter.className}>{children}</body>
+    <html lang="pt-BR" suppressHydrationWarning>
+      <body className={inter.className}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
-  );
+  )
 }
