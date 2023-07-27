@@ -42,5 +42,10 @@ export const tabulateSchedule = cache((schedules: StudentSchedule) => {
     })
   })
 
-  return horariesMap
+  return Array.from(horariesMap).sort((a, b) => {
+    const aStartTime = dayjs(`2023/01/01 ${a[0].split('-')[0]}`)
+    const bStartTime = dayjs(`2023/01/01 ${b[0].split('-')[0]}`)
+
+    return aStartTime.isBefore(bStartTime) ? -1 : 1
+  })
 })
