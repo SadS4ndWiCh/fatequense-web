@@ -25,7 +25,7 @@ export default async function StudentLayout({ children }: Props) {
       <div className="flex min-h-screen flex-col md:flex-row md:gap-2">
         <Sidebar />
 
-        <main className="flex-1 p-4 md:ml-[100px] md:p-6">{children}</main>
+        <main className="flex-1 p-4 md:ml-[5.25rem] md:p-6">{children}</main>
         <Toaster />
       </div>
     </Providers>
