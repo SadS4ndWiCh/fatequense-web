@@ -1,8 +1,5 @@
-import { notFound } from 'next/navigation'
-
 import { AlertCircle, Settings2 } from 'lucide-react'
-
-import { getCurrentUser } from '~/lib/session'
+import { Session } from 'next-auth'
 
 import { EditProfileForm } from '../forms/edit-profile-form'
 import { Alert, AlertDescription, AlertTitle } from '../ui/alert'
@@ -17,11 +14,11 @@ import {
   SheetTrigger,
 } from '../ui/sheet'
 
-export async function StudentEditProfileSheet() {
-  const user = await getCurrentUser()
+type Props = {
+  user: Session['user']
+}
 
-  if (!user) return notFound()
-
+export async function StudentEditProfileSheet({ user }: Props) {
   return (
     <Sheet>
       <SheetTrigger asChild>
