@@ -50,7 +50,7 @@ export async function StudentScheduleCalendar() {
       </div>
     )
 
-  const tabulatedSchedule = Array.from(tabulateSchedule(schedules))
+  const tabulatedSchedule = tabulateSchedule(schedules)
 
   return (
     <Table>
