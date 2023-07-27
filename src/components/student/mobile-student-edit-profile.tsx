@@ -26,7 +26,7 @@ export async function MobileStudentEditProfile() {
   return (
     <Drawer>
       <DrawerTrigger asChild>
-        <Button>
+        <Button className="w-full">
           <Settings2 className="mr-2 w-4 h-4" />
           <span>Editar Perfil</span>
         </Button>
