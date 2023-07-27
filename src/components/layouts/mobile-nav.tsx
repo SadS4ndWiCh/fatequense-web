@@ -4,7 +4,7 @@ import { GraduationCap, PanelRightClose, User } from 'lucide-react'
 
 import { studentConfig } from '~/config/student'
 
-import { SignOutButton } from '../sign-out-button'
+import { SignOutButton } from '../auth/sign-out-button'
 import { ThemeToggle } from '../theme-toggle'
 import { Button } from '../ui/button'
 import { Separator } from '../ui/separator'
