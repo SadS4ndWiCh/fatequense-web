@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { LoaderIcon } from 'lucide-react'
@@ -24,12 +24,14 @@ import {
 
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
+import { toast } from '../ui/use-toast'
 
 type FormData = z.infer<typeof studentAuthSchema>
 
 export function AuthForm() {
   const [loading, setLoading] = useState(false)
   const searchParams = useSearchParams()
+  const router = useRouter()
 
   const form = useForm<FormData>({
     resolver: zodResolver(studentAuthSchema),
@@ -38,10 +40,23 @@ export function AuthForm() {
   async function onSubmit(data: FormData) {
     setLoading(true)
 
-    await signIn('credentials', {
+    const signInResult = await signIn('credentials', {
       ...data,
+      redirect: false,
       callbackUrl: searchParams?.get('from') || '/aluno',
     })
+
+    if (!signInResult?.ok) {
+      setLoading(false)
+
+      return toast({
+        title: 'Alguma coisa deu errado!',
+        description: 'Não foi possível realizar o login. Tente novamente',
+        variant: 'destructive',
+      })
+    }
+
+    router.replace(searchParams?.get('from') || '/aluno')
   }
 
   return (
