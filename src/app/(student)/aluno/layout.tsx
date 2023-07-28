@@ -4,8 +4,6 @@ import { notFound } from 'next/navigation'
 
 import { getSession } from '~/lib/session'
 
-import { Toaster } from '~/components/ui/toaster'
-
 import { Sidebar } from '~/components/layouts/sidebar'
 import { Providers } from '~/components/providers'
 
@@ -26,7 +24,6 @@ export default async function StudentLayout({ children }: Props) {
         <Sidebar />
 
         <main className="flex-1 p-4 md:ml-[5.25rem] md:p-6">{children}</main>
-        <Toaster />
       </div>
     </Providers>
   )
