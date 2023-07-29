@@ -1,6 +1,7 @@
 import { Session } from 'next-auth'
 
 import { api } from './api'
+import { studentAllDisciplineShema } from './validations/discipline'
 import { studentHistorySchema } from './validations/history'
 import { studentPartialAbsencesSchema } from './validations/partial-absences'
 import { studentPartialGradeSchema } from './validations/partial-grade'
@@ -53,4 +54,12 @@ export const getStudentPartialAbsences = async ({ user }: Props) => {
       },
     },
   )
+}
+
+export const getStudentDisciplines = async ({ user }: Props) => {
+  return await api.get(studentAllDisciplineShema, '/student/disciplines/', {
+    headers: {
+      Authorization: `Bearer ${user.accessToken}`,
+    },
+  })
 }
