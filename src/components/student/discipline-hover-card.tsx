@@ -26,7 +26,7 @@ export function DisciplineHoverCard({ lesson }: Props) {
 
         <div className="mt-2 flex items-center">
           <Watch className="mr-2 h-4 w-4" />
-          <span>{lesson.discipline?.hoursPerLesson} aulas p/ semana</span>
+          <span>{lesson.discipline?.workload} aulas p/ semana</span>
         </div>
       </HoverCardContent>
     </HoverCard>
