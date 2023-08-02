@@ -1,9 +1,16 @@
+import { memo } from 'react'
+
 import { notFound } from 'next/navigation'
 
 import { AlertCircle } from 'lucide-react'
+import type {
+  StudentDiscipline,
+  StudentPartialAbsences as TStudentPartialAbsences,
+} from '~/types'
 
 import { getCurrentUser } from '~/lib/session'
-import { getStudentPartialAbsences } from '~/lib/student'
+import { getStudentDisciplines, getStudentPartialAbsences } from '~/lib/student'
+import { cn } from '~/lib/utils'
 
 import {
   Table,
@@ -14,11 +21,48 @@ import {
   TableRow,
 } from '../ui/table'
 
-export async function StudentPartialAbsences() {
+type AbsencesProps = {
+  partialAbsence: TStudentPartialAbsences[0]
+  discipline?: StudentDiscipline
+}
+
+function Absences({ partialAbsence, discipline }: AbsencesProps) {
+  const currentAbsences = partialAbsence.totalAbsences
+  const totalAbsencesAllowed = discipline?.totalAbsencesAllowed
+  const absencesPercentage = totalAbsencesAllowed
+    ? currentAbsences / totalAbsencesAllowed
+    : 0
+
+  return (
+    <div
+      className={cn('w-fit rounded-full px-3 py-1', {
+        'bg-green-50 text-green-600 dark:bg-green-500 dark:text-green-50':
+          absencesPercentage < 0.5,
+        'bg-yellow-50 text-yellow-600 dark:bg-yellow-500 dark:text-yellow-50':
+          absencesPercentage >= 0.5 && absencesPercentage < 1,
+        'bg-red-50 text-red-600 dark:bg-red-500 dark:text-red-50':
+          absencesPercentage >= 1,
+      })}
+    >
+      <span>{currentAbsences}</span>
+      {discipline && (
+        <span className="ml-1 text-xs">
+          /{discipline?.totalAbsencesAllowed ?? '-'}
+        </span>
+      )}
+    </div>
+  )
+}
+
+async function StudentPartialAbsencesUnmemoized() {
   const user = await getCurrentUser()
   if (!user) notFound()
 
   const partialAbsences = (await getStudentPartialAbsences({ user })) ?? []
+  const allDisciplines = (await getStudentDisciplines({ user })).reduce(
+    (prev, curr) => prev.set(curr.code, curr),
+    new Map<string, StudentDiscipline>(),
+  )
 
   if (partialAbsences.length === 0) {
     return (
@@ -63,8 +107,11 @@ export async function StudentPartialAbsences() {
           <TableRow key={partialAbsence.cod}>
             <TableCell>{partialAbsence.cod}</TableCell>
             <TableCell>{partialAbsence.disciplineName}</TableCell>
-            <TableCell className="text-center">
-              {partialAbsence.totalAbsences}
+            <TableCell className="flex justify-center">
+              <Absences
+                partialAbsence={partialAbsence}
+                discipline={allDisciplines.get(partialAbsence.cod)}
+              />
             </TableCell>
             <TableCell className="text-center">
               {partialAbsence.totalPresences}
@@ -75,3 +122,5 @@ export async function StudentPartialAbsences() {
     </Table>
   )
 }
+
+export const StudentPartialAbsences = memo(StudentPartialAbsencesUnmemoized)
