@@ -1,18 +1,18 @@
 import { memo } from 'react'
 
 import { Clock2, User } from 'lucide-react'
-import { StudentSchedule, StudentScheduleLesson } from '~/types'
 
 import { dateToTimeStr } from '~/lib/utils'
+import type { Schedule, ScheduleLesson } from '~/lib/validations/schedule'
 
 import { Badge } from '../ui/badge'
 
 type Props = {
-  schedules: StudentSchedule
+  schedules: Schedule
 }
 
 type ScheduleDayProps = {
-  lessons: StudentScheduleLesson[]
+  lessons: ScheduleLesson[]
 }
 
 const WEEKDAYS = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado']

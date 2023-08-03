@@ -1,8 +1,7 @@
 import { memo } from 'react'
 
-import { StudentSchedule } from '~/types'
-
 import { tabulateSchedule } from '~/lib/utils'
+import type { Schedule } from '~/lib/validations/schedule'
 
 import {
   Table,
@@ -15,7 +14,7 @@ import {
 import { DisciplineHoverCard } from './discipline-hover-card'
 
 type Props = {
-  schedules: StudentSchedule
+  schedules: Schedule
 }
 
 const WEEKDAYS = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado']

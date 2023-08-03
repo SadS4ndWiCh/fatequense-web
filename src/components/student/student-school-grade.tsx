@@ -10,23 +10,23 @@ import {
   Watch,
   X,
 } from 'lucide-react'
-import {
-  StudentSchoolGradeDiscipline,
-  StudentSchoolGrade as TStudentSchoolGrade,
-} from '~/types'
 
 import { cn } from '~/lib/utils'
+import type {
+  SchoolGrade,
+  SchoolGradeDiscipline,
+} from '~/lib/validations/school-grade'
 
 import { TextTooltip } from '../text-tooltip'
 
 type Props = {
-  schoolGrade: TStudentSchoolGrade
+  schoolGrade: SchoolGrade
 }
 
-type DisciplineStatusProps = Pick<StudentSchoolGradeDiscipline, 'status'>
+type DisciplineStatusProps = Pick<SchoolGradeDiscipline, 'status'>
 
 type DisciplineHistoryDetailProps = {
-  discipline: StudentSchoolGradeDiscipline
+  discipline: SchoolGradeDiscipline
 }
 
 const statusComp = {

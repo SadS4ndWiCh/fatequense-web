@@ -8,9 +8,11 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { LoaderIcon } from 'lucide-react'
 import { signIn } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
 
-import { studentAuthSchema } from '~/lib/validations/student-auth'
+import {
+  type LoginAuth,
+  studentAuthSchema,
+} from '~/lib/validations/student-auth'
 
 import {
   Form,
@@ -26,18 +28,16 @@ import { Button } from '../ui/button'
 import { Input } from '../ui/input'
 import { toast } from '../ui/use-toast'
 
-type FormData = z.infer<typeof studentAuthSchema>
-
 export function AuthForm() {
   const [loading, setLoading] = useState(false)
   const searchParams = useSearchParams()
   const router = useRouter()
 
-  const form = useForm<FormData>({
+  const form = useForm<LoginAuth>({
     resolver: zodResolver(studentAuthSchema),
   })
 
-  async function onSubmit(data: FormData) {
+  async function onSubmit(data: LoginAuth) {
     setLoading(true)
 
     const signInResult = await signIn('credentials', {

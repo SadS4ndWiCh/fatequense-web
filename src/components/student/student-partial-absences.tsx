@@ -3,14 +3,12 @@ import { memo } from 'react'
 import { notFound } from 'next/navigation'
 
 import { AlertCircle } from 'lucide-react'
-import type {
-  StudentDiscipline,
-  StudentPartialAbsences as TStudentPartialAbsences,
-} from '~/types'
 
 import { getCurrentUser } from '~/lib/session'
 import { getStudentDisciplines, getStudentPartialAbsences } from '~/lib/student'
 import { cn } from '~/lib/utils'
+import type { Discipline } from '~/lib/validations/discipline'
+import type { PartialAbsences } from '~/lib/validations/partial-absences'
 
 import {
   Table,
@@ -22,8 +20,8 @@ import {
 } from '../ui/table'
 
 type AbsencesProps = {
-  partialAbsence: TStudentPartialAbsences[0]
-  discipline?: StudentDiscipline
+  partialAbsence: PartialAbsences[0]
+  discipline?: Discipline
 }
 
 function Absences({ partialAbsence, discipline }: AbsencesProps) {
@@ -61,7 +59,7 @@ async function StudentPartialAbsencesUnmemoized() {
   const partialAbsences = (await getStudentPartialAbsences({ user })) ?? []
   const allDisciplines = (await getStudentDisciplines({ user })).reduce(
     (prev, curr) => prev.set(curr.code, curr),
-    new Map<string, StudentDiscipline>(),
+    new Map<string, Discipline>(),
   )
 
   if (partialAbsences.length === 0) {

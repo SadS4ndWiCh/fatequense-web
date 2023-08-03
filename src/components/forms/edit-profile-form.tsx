@@ -9,9 +9,8 @@ import { LoaderIcon } from 'lucide-react'
 import { Session } from 'next-auth'
 import { useSession } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
 
-import { editProfileSchema } from '~/lib/validations/profile'
+import { type EditProfile, editProfileSchema } from '~/lib/validations/profile'
 
 import {
   Form,
@@ -27,8 +26,6 @@ import { Button } from '../ui/button'
 import { Input } from '../ui/input'
 import { toast } from '../ui/use-toast'
 
-type FormData = z.infer<typeof editProfileSchema>
-
 type Props = {
   user: Session['user']
 }
@@ -39,14 +36,14 @@ export function EditProfileForm({ user }: Props) {
 
   const [loading, setLoading] = useState(false)
 
-  const form = useForm<FormData>({
+  const form = useForm<EditProfile>({
     resolver: zodResolver(editProfileSchema),
     defaultValues: {
       photoUrl: user.picture,
     },
   })
 
-  async function onSubmit(data: FormData) {
+  async function onSubmit(data: EditProfile) {
     setLoading(true)
 
     const res = await fetch('/api/student/edit', {
