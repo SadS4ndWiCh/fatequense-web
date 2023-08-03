@@ -7,6 +7,7 @@ import { studentPartialAbsencesSchema } from './validations/partial-absences'
 import { studentPartialGradeSchema } from './validations/partial-grade'
 import { studentProfileSchema } from './validations/profile'
 import { studentScheduleSchema } from './validations/schedule'
+import { schoolGradeSchema } from './validations/school-grade'
 
 type Props = {
   user: Session['user']
@@ -54,6 +55,14 @@ export const getStudentPartialAbsences = async ({ user }: Props) => {
       },
     },
   )
+}
+
+export const getStudentSchoolGrade = async ({ user }: Props) => {
+  return await api.get(schoolGradeSchema, '/student/school-grade', {
+    headers: {
+      Authorization: `Bearer ${user.accessToken}`,
+    },
+  })
 }
 
 export const getStudentDisciplines = async ({ user }: Props) => {
