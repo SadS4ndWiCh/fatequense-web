@@ -1,11 +1,14 @@
+import { memo } from 'react'
+
 import { notFound } from 'next/navigation'
 
 import { AlertCircle } from 'lucide-react'
 
 import { getCurrentUser } from '~/lib/session'
 import { getStudentPartialGrades } from '~/lib/student'
-import { cn, dateToTimeStr } from '~/lib/utils'
+import { cn, dateToStr } from '~/lib/utils'
 
+import { TextTooltip } from '../text-tooltip'
 import {
   Table,
   TableBody,
@@ -29,7 +32,7 @@ function Grade({ grade }: { grade: number }) {
   )
 }
 
-export async function StudentPartialGrades() {
+async function StudentPartialGradesUnmemoized() {
   const user = await getCurrentUser()
   if (!user) notFound()
 
@@ -97,9 +100,14 @@ export async function StudentPartialGrades() {
                   <Grade grade={exams?.grade || 0} />
 
                   {exams?.startsAt && (
-                    <time dateTime={exams.startsAt} className="text-xs">
-                      {dateToTimeStr(exams.startsAt)}
-                    </time>
+                    <TextTooltip text={`Data da P${i + 1}`}>
+                      <div>
+                        <time dateTime={exams.startsAt} className="text-xs">
+                          {dateToStr(exams.startsAt)}
+                        </time>
+                        <p className="sr-only">Data da P{i + 1}</p>
+                      </div>
+                    </TextTooltip>
                   )}
                 </div>
               </TableCell>
@@ -113,3 +121,5 @@ export async function StudentPartialGrades() {
     </Table>
   )
 }
+
+export const StudentPartialGrades = memo(StudentPartialGradesUnmemoized)
