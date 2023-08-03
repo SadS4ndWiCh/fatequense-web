@@ -8,6 +8,7 @@ export const disciplineLessonsSchema = z.array(
     absences: z.number(),
   }),
 )
+export type DisciplineLessons = z.infer<typeof disciplineLessonsSchema>
 
 export const studentPartialAbsencesSchema = z.array(
   z.object({
@@ -18,5 +19,4 @@ export const studentPartialAbsencesSchema = z.array(
     lessons: disciplineLessonsSchema,
   }),
 )
-
 export type PartialAbsences = z.infer<typeof studentPartialAbsencesSchema>
