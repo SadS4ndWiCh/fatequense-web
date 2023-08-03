@@ -14,6 +14,10 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+export function dateToStr(date: string) {
+  return dayjs(date).format('DD/MM/YY')
+}
+
 export function dateToTimeStr(date: string) {
   return dayjs(date).format('HH:mm')
 }
