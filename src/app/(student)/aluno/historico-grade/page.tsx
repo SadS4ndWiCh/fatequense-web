@@ -9,7 +9,7 @@ export default async function HistoryGrade() {
   const user = await getCurrentUser()
   if (!user) notFound()
 
-  const schoolGrade = await getStudentSchoolGrade({ user })
+  const schoolGrade = await getStudentSchoolGrade(user.accessToken)
 
   return (
     <div>

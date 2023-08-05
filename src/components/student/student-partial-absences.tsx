@@ -7,8 +7,8 @@ import { AlertCircle } from 'lucide-react'
 import { getCurrentUser } from '~/lib/session'
 import { getStudentDisciplines, getStudentPartialAbsences } from '~/lib/student'
 import { cn } from '~/lib/utils'
-import type { Discipline } from '~/lib/validations/discipline'
-import type { PartialAbsences } from '~/lib/validations/partial-absences'
+import { type Discipline } from '~/lib/validations/discipline'
+import { type PartialAbsences } from '~/lib/validations/partial-absences'
 
 import {
   Table,
@@ -56,8 +56,9 @@ async function StudentPartialAbsencesUnmemoized() {
   const user = await getCurrentUser()
   if (!user) notFound()
 
-  const partialAbsences = (await getStudentPartialAbsences({ user })) ?? []
-  const allDisciplines = (await getStudentDisciplines({ user })).reduce(
+  const partialAbsences =
+    (await getStudentPartialAbsences(user.accessToken)) ?? []
+  const allDisciplines = (await getStudentDisciplines(user.accessToken)).reduce(
     (prev, curr) => prev.set(curr.code, curr),
     new Map<string, Discipline>(),
   )

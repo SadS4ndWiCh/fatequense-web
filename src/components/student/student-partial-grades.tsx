@@ -36,7 +36,7 @@ async function StudentPartialGradesUnmemoized() {
   const user = await getCurrentUser()
   if (!user) notFound()
 
-  const partialGrades = (await getStudentPartialGrades({ user })) ?? []
+  const partialGrades = (await getStudentPartialGrades(user.accessToken)) ?? []
 
   if (partialGrades.length === 0) {
     return (

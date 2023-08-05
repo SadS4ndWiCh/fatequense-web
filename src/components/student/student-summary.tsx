@@ -9,7 +9,7 @@ export async function StudentSummary() {
   const user = await getCurrentUser()
   if (!user) notFound()
 
-  const profile = await getStudentProfile({ user })
+  const profile = await getStudentProfile(user.accessToken)
 
   return (
     <section className="flex flex-col gap-6 lg:flex-row">

@@ -18,7 +18,7 @@ export default async function Horary() {
   const user = await getCurrentUser()
   if (!user) notFound()
 
-  const schedules = (await getStudentSchedules({ user })) ?? []
+  const schedules = (await getStudentSchedules(user.accessToken)) ?? []
   const isSchedulesEmpty = schedules.every((day) => day.length === 0)
 
   return (
