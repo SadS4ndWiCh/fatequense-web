@@ -14,7 +14,7 @@ export async function StudentTodaySchedule() {
   const user = await getCurrentUser()
   if (!user) notFound()
 
-  const schedules = (await getStudentSchedules({ user })) ?? []
+  const schedules = (await getStudentSchedules(user.accessToken)) ?? []
   const today = dayjs().day() - 1
 
   const todaySchedules = today >= 0 ? schedules[today] : []

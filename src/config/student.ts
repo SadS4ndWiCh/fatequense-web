@@ -1,4 +1,11 @@
-import { CalendarDays, Home, Inbox, Puzzle, Star } from 'lucide-react'
+import {
+  CalendarDays,
+  Home,
+  Inbox,
+  LayoutGrid,
+  Puzzle,
+  Star,
+} from 'lucide-react'
 
 export const studentConfig = {
   sidebar: [
@@ -26,6 +33,11 @@ export const studentConfig = {
       href: '/aluno/historico',
       label: 'Histórico',
       icon: Inbox,
+    },
+    {
+      href: '/aluno/historico-grade',
+      label: 'Histórico em Grade',
+      icon: LayoutGrid,
     },
   ],
 } as const

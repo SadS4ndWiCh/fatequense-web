@@ -1,9 +1,10 @@
-# 🏫 Fatequense
+![Fatequense](./.github/assets/banner.png)
 
-Plataforma para visualizar os dados de estudante dos alunos da Fatec
+[![Latest release](https://img.shields.io/github/package-json/v/SadS4ndWiCh/fatequense-web)](https://github.com/SadS4ndWiCh/fatequense-web/releases)
+
+Fatequense é uma plataforma para que os estudantes das Fatecs possam ter uma melhor experiência ao visualizar suas informações
 
 ## 🔎 Observações
-
 - A aplicação pode dar problema a qualquer momento caso haja mudanças significativas no site do SIGA.
 - A aplicação pode ser utilizada apenas por contas de estudantes da Fatec.
 
@@ -15,35 +16,3 @@ Plataforma para visualizar os dados de estudante dos alunos da Fatec
 - [TailwindCSS](https://tailwindcss.com)
 - [JWT](https://jwt.io)
 - [Shadcn UI](https://ui.shadcn.com/)
-
-## 🖼️ Telas
-
-### Página inicial
-![Página inicial](./.github/screenshots/initial-page-dark.png)
-### Página de login 
-![Página de login](./.github/screenshots/login-page-dark.png)
-### Página home do estudante
-![Página home do estudante](./.github/screenshots/student-home-page-dark.png)
-### Página de horários do estudante
-![Página home do estudante](./.github/screenshots/student-schedule-page-dark.png)
-### Página de notas do estudante
-![Página home do estudante](./.github/screenshots/student-partial-grade-page-dark.png)
-### Página de faltas do estudante
-![Página home do estudante](./.github/screenshots/student-partial-absences-page-dark.png)
-### Página de histórico do estudante
-![Página home do estudante](./.github/screenshots/student-history-page-dark.png)
-
-### Página de perfil do estudante
-![Página home do estudante](./.github/screenshots/student-profile-page-dark.png)
-
-### Página de perfil do estudante (editar perfil)
-![Página home do estudante](./.github/screenshots/student-edit-profile-form-dark.png)
-
-### Página de home do estudante (mobile)
-![Página home do estudante](./.github/screenshots/student-home-page-mobile-dark.png)
-
-### Página de home do estudante (barra lateral no mobile)
-![Página home do estudante](./.github/screenshots/student-home-page-sidebar-mobile-dark.png)
-
-### Página de home do estudante (aulas de hoje no mobile)
-![Página home do estudante](./.github/screenshots/student-home-today-schedule-mobile-dark.png)

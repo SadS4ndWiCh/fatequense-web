@@ -19,7 +19,7 @@ export async function StudentHistory() {
   const user = await getCurrentUser()
   if (!user) notFound()
 
-  const data = (await getStudentHistory({ user })) ?? []
+  const data = (await getStudentHistory(user.accessToken)) ?? []
 
   return (
     <Table>

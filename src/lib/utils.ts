@@ -3,23 +3,30 @@ import { cache } from 'react'
 import { type ClassValue, clsx } from 'clsx'
 import dayjs from 'dayjs'
 import { twMerge } from 'tailwind-merge'
-import type { StudentSchedule, StudentScheduleLesson } from '~/types'
 
-import { studentScheduleSchema } from './validations/schedule'
+import {
+  type Schedule,
+  type ScheduleLesson,
+  studentScheduleSchema,
+} from './validations/schedule'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
+}
+
+export function dateToStr(date: string) {
+  return dayjs(date).format('DD/MM/YY')
 }
 
 export function dateToTimeStr(date: string) {
   return dayjs(date).format('HH:mm')
 }
 
-type ScheduleHorary = StudentScheduleLesson & {
+type ScheduleHorary = ScheduleLesson & {
   weekday: number
 }
 
-export const tabulateSchedule = cache((schedules: StudentSchedule) => {
+export const tabulateSchedule = cache((schedules: Schedule) => {
   const schedulesParsed = studentScheduleSchema.parse(schedules)
 
   const horariesMap = new Map<string, ScheduleHorary[]>()

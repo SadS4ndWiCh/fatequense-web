@@ -1,13 +1,13 @@
 import { Watch } from 'lucide-react'
-import { StudentScheduleLesson } from '~/types'
 
 import { cn } from '~/lib/utils'
+import type { ScheduleLesson } from '~/lib/validations/schedule'
 
 import { buttonVariants } from '../ui/button'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card'
 
 type Props = {
-  lesson?: StudentScheduleLesson
+  lesson?: ScheduleLesson
 }
 
 export function DisciplineHoverCard({ lesson }: Props) {
@@ -26,7 +26,7 @@ export function DisciplineHoverCard({ lesson }: Props) {
 
         <div className="mt-2 flex items-center">
           <Watch className="mr-2 h-4 w-4" />
-          <span>{lesson.discipline?.hoursPerLesson} aulas p/ semana</span>
+          <span>{lesson.discipline?.workload} aulas p/ semana</span>
         </div>
       </HoverCardContent>
     </HoverCard>

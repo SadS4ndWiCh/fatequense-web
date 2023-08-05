@@ -4,6 +4,8 @@ import { Inter } from 'next/font/google'
 
 import { siteConfig } from '~/config/site'
 
+import { Toaster } from '~/components/ui/toaster'
+
 import { ThemeProvider } from '~/components/theme-provider'
 
 import './globals.css'
@@ -25,6 +27,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
         </ThemeProvider>
+        <Toaster />
       </body>
     </html>
   )

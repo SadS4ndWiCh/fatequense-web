@@ -22,7 +22,9 @@ export const studentProfileSchema = z.object({
     state: z.string(),
   }),
 })
+export type Profile = z.infer<typeof studentProfileSchema>
 
 export const editProfileSchema = z.object({
   photoUrl: z.string().url().optional(),
 })
+export type EditProfile = z.infer<typeof editProfileSchema>
